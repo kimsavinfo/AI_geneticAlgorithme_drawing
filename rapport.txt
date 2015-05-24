@@ -1,0 +1,10 @@
+Logique : traitement limite big data
+optimiser au maximum les calculs :
+	addition plutôt que division
+	tout en un tableau à une dimension = matrice
+	php plutôt que js car serveur exécute et pas navigateur
+
+mt_rand : Par défaut, PHP utilise le générateur de nombres aléatoires de libc avec la fonction rand(). mt_rand() est une fonction de remplacement, pour cette dernière. Elle utilise un générateur de nombres aléatoire de caractéristique connue, le " » Mersenne Twister " qui est 4 fois plus rapide que la fonction standard libc. 
+<!> ne pas utiliser si tâche est liée à la sécurité mais pas notre cas…
+-> random plus rapide
+
