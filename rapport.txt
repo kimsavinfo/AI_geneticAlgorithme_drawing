@@ -8,3 +8,4 @@ mt_rand : Par défaut, PHP utilise le générateur de nombres aléatoires de lib
 <!> ne pas utiliser si tâche est liée à la sécurité mais pas notre cas…
 -> random plus rapide
 
+Stocker l’image uploadée dans dossier tempo avec toujours le même nom
