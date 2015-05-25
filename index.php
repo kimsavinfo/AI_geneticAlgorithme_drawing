@@ -1,6 +1,8 @@
 <?php
 	session_start();
+
 	require_once('genetic/Individu.php');
+
 	
 	// $individu = new Individu(125,145,231,0.85);
 	// echo $individu->to_string()."<br/>";
@@ -8,13 +10,14 @@
 	// echo $individu->to_string()."<br/>";
 
 
-	// TODO ; déplacer dans /kmeans_colours
+	// TODO ; déplacer dans /genetic : objet Image avec liste Pixels avec genome similaire à Individu
 	if(!isset($_SESSION['upload_file']))
 	{
 		$_SESSION['upload_file'] = "uploaded/france.png";
 	}
 	if(isset($_SESSION['upload_file']))
 	{
+		// Get uploaded image pixels
 		$image = imagecreatefrompng($_SESSION['upload_file']);
 		$size = getimagesize($_SESSION['upload_file']);
 	
