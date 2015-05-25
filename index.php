@@ -12,3 +12,6 @@ echo $individu->to_string()."<br/>";
 $individu->mutate();
 
 echo $individu->to_string()."<br/>";
+
+// TODO : upload drapeau
+// NNS coleurs principales avec nombre éditable, et nb itération max
