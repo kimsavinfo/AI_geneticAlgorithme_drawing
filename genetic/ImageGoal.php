@@ -4,8 +4,9 @@ require_once('Individual.php');
 
 class ImageGoal
 {
-	// 
+	// Maximum colour centers
 	private $MAX_MAIN_COLOURS = 1;
+	private $MAX_MAIN_COLOURS_ITERATIONS = 1000;
 	// Minimum distance for the main colour : when do we stop looking for ?
 	private $MIN_ACCEPTED_DIST = 100;
 	
@@ -35,8 +36,7 @@ class ImageGoal
 			}
 		}
 		
-		$this->checkNbMaxMainColours($p_max_main_colours);
-		$this->findMainColours();
+		$this->findMainColours($p_max_main_colours);
 	}
 	
 	/* === DIFFERENT COLOURS : all colours but 1 time only ============= */
@@ -55,16 +55,20 @@ class ImageGoal
 	/**
 	* A center is a colour reference, which will become a main colour
 	**/
-	private function findMainColours()
+	private function findMainColours($p_max_main_colours = 1)
 	{
+		$this->checkNbMaxMainColours($p_max_main_colours);
 		$this->initMainColours();
+		$iIteration = 0;
 		
 		do
 		{
 			$biggest_center_distance = 0;
 			
 			
-		}while($biggest_center_distance > $this->MIN_ACCEPTED_DIST);
+			$iIteration++;
+		}while($biggest_center_distance > $this->MIN_ACCEPTED_DIST
+				&& $iIteration < $this->MAX_MAIN_COLOURS_ITERATIONS);
 	}
 	
 	/**
@@ -86,7 +90,7 @@ class ImageGoal
 		}
 	}
 	
-	private function checkNbMaxMainColours($p_max_main_colours)
+	private function checkNbMaxMainColours($p_max_main_colours = 1)
 	{
 		$nb_max = count($this->different_colours);
 		$this->MAX_MAIN_COLOURS = $p_max_main_colours < $nb_max ? $p_max_main_colours : $nb_max;
