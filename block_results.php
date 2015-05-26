@@ -4,10 +4,15 @@ if(!isset($_SESSION['upload_file']))
 {
 	$_SESSION['upload_file'] = $_SESSION['upload_dir']."/france.png";
 }
+
+$individuals_goals = array();
+$main_colours = array();
+
 if(isset($_SESSION['upload_file']))
 {
-	$population_goal = new ImageGoal($_SESSION['upload_file']);
-	$individuals_goals = $population_goal->get_individuals();
+	$population_goal = new ImageGoal($_SESSION['upload_file'], 3);
+	$individuals_goals = $population_goal->getIndividuals();
+	$main_colours = $population_goal->getMainColours();
 }
 ?>
 
@@ -19,16 +24,21 @@ if(isset($_SESSION['upload_file']))
 	</div>
 	<div class="col-md-6" class="text-center">
 		<h2>Main colours :</h2>
-		
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-6" class="text-center">
-		<h2>Pixels : <?php echo count($individuals_goals); ?></h2>
-<?php 
-if(isset($individuals_goals))
+		<!-- TODO : Espace pour les pixels générés par algo gen -->
+<?php
+foreach ($main_colours as $individual)
 {
 ?>
+		<div class="main_colour_rectangle" 
+			style="background-color: rgb(<?php echo $individual->getRGBStringCSS(); ?>);">
+		</div>
+<?php
+}
+?>
+	</div>
+	
+	<div class="col-md-6" class="text-center">
+		<h2>Pixels : <?php echo count($individuals_goals); ?></h2>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -44,21 +54,16 @@ foreach ($individuals_goals as $individual)
 {
 ?>
 				<tr>
-					<td><?php echo sprintf('%d',$individual->get_red()); ?></td>
-					<td><?php echo sprintf('%d',$individual->get_green()); ?></td>
-					<td><?php echo sprintf('%d',$individual->get_blue()); ?></td>
-					<td><?php echo sprintf('%.2f',$individual->get_alpha()); ?></td>
+					<td><?php echo sprintf('%d',$individual->getRed()); ?></td>
+					<td><?php echo sprintf('%d',$individual->getGreen()); ?></td>
+					<td><?php echo sprintf('%d',$individual->getBlue()); ?></td>
+					<td><?php echo sprintf('%.2f',$individual->getAlpha()); ?></td>
 				</tr>
 <?php
 }
 ?>
 			</tbody>
 		</table>
-<?php
-}
-?>
 	</div>
-	<div class="col-md-6" class="text-center">
-		<!-- TODO : Espace pour les pixels générés par algo gen -->
-	</div>
+
 </div>

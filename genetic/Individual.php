@@ -18,7 +18,7 @@ class Individual
 		$this->genome[3] = new GeneAlpha($p_alpha);
 	}
 	
-	public function get_genome()
+	public function getGenome()
 	{
 		return $genome;
 	}
@@ -31,39 +31,49 @@ class Individual
 		
 		for($i=0;$i<$nbAffetcedGenees;$i++)
 		{
-			$randSelectedGenee = mt_rand(1,count($genesIndexes));
-			$this->genome[--$randSelectedGenee]->mutate();
+			$rand_selected_gene = mt_rand(1,count($genesIndexes));
+			$this->genome[--$rand_selected_gene]->mutate();
 			
-			unset($genesIndexes[$randSelectedGenee]);
+			unset($genesIndexes[$rand_selected_gene]);
 			$genesIndexes = array_values($genesIndexes);
 		}
 	}
 	
-	public function to_string()
+	public function toString()
 	{
-		return 'Red : '.$this->genome[0]->get_colour().
-		' Green : '.$this->genome[1]->get_colour().
-		' Blue : '.$this->genome[2]->get_colour().
-		' Alpha : '.$this->genome[3]->get_opacity();
+		return 'Red : '.$this->getRed().
+		' Green : '.$this->getGreen().
+		' Blue : '.$this->getBlue().
+		' Alpha : '.$this->getAlpha();
 	}
 	
-	public function get_red()
+	public function getRGBStringCSS()
 	{
-		return $this->genome[0]->get_colour();
+		return $this->getRed().",".$this->getGreen().",".$this->getBlue();
 	}
 	
-	public function get_green()
+	public function getRGBSStringRaw()
 	{
-		return $this->genome[1]->get_colour();
+		return $this->getRed().$this->getGreen().$this->getBlue().$this->getAlpha();
 	}
 	
-	public function get_blue()
+	public function getRed()
 	{
-		return $this->genome[2]->get_colour();
+		return $this->genome[0]->getColour();
 	}
 	
-	public function get_alpha()
+	public function getGreen()
 	{
-		return $this->genome[3]->get_opacity();
+		return $this->genome[1]->getColour();
+	}
+	
+	public function getBlue()
+	{
+		return $this->genome[2]->getColour();
+	}
+	
+	public function getAlpha()
+	{
+		return $this->genome[3]->getOpacity();
 	}
 }

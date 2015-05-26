@@ -6,15 +6,15 @@ class GeneGreen
 	
 	public function __construct($new_colour)
 	{
-		$this->set_colour($new_colour);
+		$this->setColour($new_colour);
 	}
 	
-	public function get_colour()
+	public function getColour()
 	{
 		return $this->green;
 	}
 	
-	public function set_colour($new_colour)
+	public function setColour($new_colour)
 	{
 		if(is_int($new_colour))
 		{
@@ -24,6 +24,6 @@ class GeneGreen
 	
 	public function mutate()
 	{
-		$this->set_colour(mt_rand(0,255));
+		$this->setColour(mt_rand(0,255));
 	}
 }

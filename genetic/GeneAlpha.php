@@ -6,15 +6,15 @@ class GeneAlpha
 	
 	public function __construct($new_opacity)
 	{
-		$this->set_opacity($new_opacity);
+		$this->setOpacity($new_opacity);
 	}
 	
-	public function get_opacity()
+	public function getOpacity()
 	{
 		return $this->alpha;
 	}
 	
-	public function set_opacity($new_opacity)
+	public function setOpacity($new_opacity)
 	{
 		if(is_float($new_opacity))
 		{
@@ -25,6 +25,6 @@ class GeneAlpha
 	public function mutate()
 	{
 		$new_opacity = (float) mt_rand(0,100)/100;
-		$this->set_opacity($new_opacity);
+		$this->setOpacity($new_opacity);
 	}
 }

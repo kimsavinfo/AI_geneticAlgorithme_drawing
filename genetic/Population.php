@@ -11,7 +11,7 @@ class ImageGoal
 		// TODO
 	}
 	
-	public function get_individuals()
+	public function getIndividuals()
 	{
 		return $this->individuals;
 	}
