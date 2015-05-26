@@ -1,10 +1,4 @@
 <?php
-// Set a default image
-if(!isset($_SESSION['upload_file']))
-{
-	$_SESSION['upload_file'] = $_SESSION['upload_dir']."/france.png";
-}
-
 $individuals_goals = array();
 $main_colours = array();
 

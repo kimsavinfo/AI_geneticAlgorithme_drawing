@@ -1,9 +1,7 @@
 <?php
-	session_start();
-	
-	require_once('params.php');
-	require_once('libs/file_manager.php');
-	require_once('genetic/ImageGoal.php');
+require_once('params.php');
+require_once('libs/file_manager.php');
+require_once('genetic/ImageGoal.php');
 ?>
 
 <!DOCTYPE html>
@@ -67,3 +65,7 @@
 		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
+
+<?php
+	session_destroy();
+?>

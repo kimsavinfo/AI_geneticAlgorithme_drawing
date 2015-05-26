@@ -5,7 +5,7 @@
 			<div class="form-group">
 				<label for="user_file">Image :</label>
 				<input type="file" name="user_file" id="user_file">
-				<p class="help-block">Accepted extensions : jpg , jpeg , gif ou png)</p>
+				<p class="help-block">Accepted extension : png only</p>
 				<p class="help-block">Size max : 1Mo max</p>
 			</div>
 			<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />

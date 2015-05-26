@@ -68,6 +68,7 @@ class ImageGoal
 			$this->sortColoursInMainColours();
 			
 			
+			
 			$iIteration++;
 		}while($biggest_center_distance > $this->MIN_ACCEPTED_DIST
 				&& $iIteration < $this->MAX_MAIN_COLOURS_ITERATIONS);
