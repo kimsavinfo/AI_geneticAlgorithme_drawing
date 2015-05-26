@@ -9,3 +9,8 @@ mt_rand : Par défaut, PHP utilise le générateur de nombres aléatoires de lib
 -> random plus rapide
 
 Stocker l’image uploadée dans dossier tempo avec toujours le même nom
+
+
+php_ini : 128 MB max memory_limit
+
+26/05/2015 : a pensé à l'algo k-means pour trouver les couleurs princpales mais on n'explorerait pas toutes les routes...

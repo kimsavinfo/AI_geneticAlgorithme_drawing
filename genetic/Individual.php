@@ -53,8 +53,11 @@ class Individual
 	}
 	
 	public function getRGBSStringRaw()
-	{
-		return $this->getRed().$this->getGreen().$this->getBlue().$this->getAlpha();
+	{		
+		return $this->genome[0]->getColour3Digits().
+		$this->genome[1]->getColour3Digits().
+		$this->genome[2]->getColour3Digits().
+		$this->genome[3]->getOpacity3Digits();
 	}
 	
 	public function getRed()

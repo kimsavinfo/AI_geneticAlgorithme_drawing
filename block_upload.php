@@ -9,7 +9,7 @@
 				<p class="help-block">Size max : 1Mo max</p>
 			</div>
 			<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-			<div class="text-center">
+			<div class="text-left">
 				<input type="submit" name="submit" value="Upload" class="btn btn-primary" />
 			</div>
 		</form>

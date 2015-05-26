@@ -7,4 +7,5 @@ $_SESSION['upload_dir'] = "uploaded";
 if(!isset($_SESSION['upload_file']))
 {
 	$_SESSION['upload_file'] = $_SESSION['upload_dir']."/france.png";
+	// $_SESSION['upload_file'] = $_SESSION['upload_dir']."/mario-pixelise.png";
 }

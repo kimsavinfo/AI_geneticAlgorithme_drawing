@@ -9,9 +9,19 @@ class GeneRed
 		$this->setColour($new_colour);
 	}
 	
+	public function mutate()
+	{
+		$this->setColour(mt_rand(0,255));
+	}
+	
 	public function getColour()
 	{
 		return $this->red;
+	}
+	
+	public function getColour3Digits()
+	{
+		return sprintf("%'.03d\n", $this->getColour());
 	}
 	
 	public function setColour($new_colour)
@@ -20,10 +30,5 @@ class GeneRed
 		{
 			$this->red = $new_colour;
 		}
-	}
-	
-	public function mutate()
-	{
-		$this->setColour(mt_rand(0,255));
 	}
 }
