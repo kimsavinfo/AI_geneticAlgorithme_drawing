@@ -1,6 +1,8 @@
 <?php
 	session_start();
-
+	
+	require_once('params.php');
+	require_once('libs/file_manager.php');
 	require_once('genetic/Individu.php');
 
 	
@@ -8,9 +10,10 @@
 	// echo $individu->to_string()."<br/>";
 	// $individu->mutate();
 	// echo $individu->to_string()."<br/>";
+	
 
-
-	// TODO ; déplacer dans /genetic : objet Image avec liste Pixels avec genome similaire à Individu
+	// TODO ; déplacer dans /genetic : 
+	// objet Image avec liste Pixels avec genome similaire à Individu
 	if(!isset($_SESSION['upload_file']))
 	{
 		$_SESSION['upload_file'] = "uploaded/france.png";
@@ -71,10 +74,9 @@
 				</div>
 				<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 				<div class="text-center">
-					<input type="submit" name="submit" value="Envoyer" class="btn btn-primary" />
+					<input type="submit" name="submit" value="Upload" class="btn btn-primary" />
 				</div>
 			</form>
-			<hr>
 <?php
 	if (isset($_SESSION['message_danger']))
 	{
@@ -104,14 +106,12 @@
 ?>
 			<!-- Image uploaded and genetic algorithm results -->
 			<div class="row">
-				<div class="col-md-12" class="text-center">
-					<h2>Uploaded image</h2>
+				<div class="col-md-6" class="text-center">
+					<h2>Testing the image :</h2>
 					<img src="<?php echo $_SESSION['upload_file']; ?>" class="img-responsive" alt="Responsive image">
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12" class="text-center">
-					<h2>Main colours</h2>
+				<div class="col-md-6" class="text-center">
+					<h2>Main colours :</h2>
 					
 				</div>
 			</div>
@@ -177,4 +177,3 @@
 		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
->>>>>>> origin/master

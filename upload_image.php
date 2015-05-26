@@ -1,12 +1,10 @@
 <?php
 
 session_start();
-$_SESSION = array();
 
 if(isset($_FILES['user_file']))
 {
-	$upload_dir = 'uploaded/';
-	$upload_file = $upload_dir.basename($_FILES['user_file']['name']);
+	$upload_file = $_SESSION['upload_dir']."/".basename($_FILES['user_file']['name']);
 
 	if (move_uploaded_file($_FILES['user_file']['tmp_name'], $upload_file)) 
 	{
