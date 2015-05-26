@@ -15,7 +15,7 @@ class GeneRed
 	}
 	
 	public function setColour($new_colour)
-	{
+	{		
 		if(is_int($new_colour))
 		{
 			$this->red = $new_colour;
