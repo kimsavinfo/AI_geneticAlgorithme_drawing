@@ -6,16 +6,16 @@ require_once('GeneBlue.php');
 require_once('GeneGreen.php');
 
 
-class Individu
+class Individual
 {
 	private $genome = array();
 	
-	public function __construct($red, $green, $blue, $alpha)
+	public function __construct($p_red, $p_green, $p_blue, $p_alpha)
 	{
-		$this->genome[0] = new GeneRed($red);
-		$this->genome[1] = new GeneGreen($green); 
-		$this->genome[2] = new GeneBlue($blue); 
-		$this->genome[3] = new GeneAlpha($alpha);
+		$this->genome[0] = new GeneRed($p_red);
+		$this->genome[1] = new GeneGreen($p_green); 
+		$this->genome[2] = new GeneBlue($p_blue); 
+		$this->genome[3] = new GeneAlpha($p_alpha);
 	}
 	
 	public function get_genome()
@@ -45,5 +45,25 @@ class Individu
 		' Green : '.$this->genome[1]->get_colour().
 		' Blue : '.$this->genome[2]->get_colour().
 		' Alpha : '.$this->genome[3]->get_opacity();
+	}
+	
+	public function get_red()
+	{
+		return $this->genome[0]->get_colour();
+	}
+	
+	public function get_green()
+	{
+		return $this->genome[1]->get_colour();
+	}
+	
+	public function get_blue()
+	{
+		return $this->genome[2]->get_colour();
+	}
+	
+	public function get_alpha()
+	{
+		return $this->genome[3]->get_opacity();
 	}
 }
