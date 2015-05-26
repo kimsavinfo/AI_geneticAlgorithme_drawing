@@ -5,8 +5,9 @@ require_once('Individual.php');
 class ImageGoal
 {
 	private $individuals = array();
+	private $main_colours = array();
 	
-	public function __construct($p_path)
+	public function __construct($p_path, $p_max_main_colour = 1)
 	{
 		$image = imagecreatefrompng($p_path);
 		$size = getimagesize($p_path);
@@ -26,9 +27,16 @@ class ImageGoal
 				$this->individuals[] = $individual;
 			}
 		}
+		
+		$this->findMainColours($p_max_main_colour );
 	}
 	
-	public function get_individuals()
+	private function findMainColours($p_max_main_colour = 1)
+	{
+		$main_colours = array();
+	}
+	
+	public function getIndividuals()
 	{
 		return $this->individuals;
 	}
