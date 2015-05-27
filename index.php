@@ -5,6 +5,7 @@ require_once('genetic/Population.php');
 $file_test = "uploaded/france.png";
 
 $population = new Population($file_test);
+$population->evolve();
 
 ?>
 
@@ -44,11 +45,11 @@ $population = new Population($file_test);
 								<th>Alpha</th>
 								<th>Colour</th>
 								<th>Colour</th>
+								<th>Fitting total</th>
 								<th>Red</th>
 								<th>Blue</th>
 								<th>Green</th>
 								<th>Alpha</th>
-								<th>Fitting total</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -80,6 +81,14 @@ $population = new Population($file_test);
 									</div>
 								</td>
 								<td>
+									<div class="main_colour_rectangle" 
+										style="background-color: rgb(<?php echo $individual->getRGBStringCSS(); ?>);">
+									</div>
+								</td>
+								<td>
+									<?php echo sprintf('%.2f',$individual->getFitting()); ?>
+								</td>
+								<td>
 									<?php echo sprintf('%d',$individual->getRed()->getColour()); ?>
 									(<?php echo sprintf('%d',$individual->getRed()->getFitting()); ?>)
 								</td>
@@ -94,14 +103,6 @@ $population = new Population($file_test);
 								<td>
 									<?php echo sprintf('%.2f',$individual->getAlpha()->getOpacity()); ?>
 									(<?php echo sprintf('%d',$individual->getAlpha()->getFitting()); ?>)
-								</td>
-								<td>
-									<?php echo sprintf('%.2f',$individual->getFitting()); ?>
-								</td>
-								<td>
-									<div class="main_colour_rectangle" 
-										style="background-color: rgb(<?php echo $individual->getRGBStringCSS(); ?>);">
-									</div>
 								</td>
 							</tr>
 					<?php
