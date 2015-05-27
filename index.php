@@ -28,38 +28,75 @@ $population = new Population($file_test);
 	<body>
 		<div class="container">
 			Image de test : <img src="<?php echo $file_test  ?>" class="img-responsive" alt="Responsive image">
-			
+			<hr/>
 			<div class="row">
-				<div class="col-md-3">
-					<h3>Population init : </h3>
+				<div class="col-md-12">
 					<table class="table table-bordered">
 						<thead>
+							<tr>
+								<th colspan="5">Goal</th>
+								<th colspan="6">Genetic (fitting)</th>
+							</tr>
 							<tr>
 								<th>Red</th>
 								<th>Blue</th>
 								<th>Green</th>
 								<th>Alpha</th>
 								<th>Colour</th>
+								<th>Colour</th>
+								<th>Red</th>
+								<th>Blue</th>
+								<th>Green</th>
+								<th>Alpha</th>
+								<th>Fitting total</th>
 							</tr>
 						</thead>
 						<tbody>
 					<?php
+					$individuals_goal = $population->getImageGoal()->getIndividuals();
 					$individuals = $population->getIndividuals();
-					foreach ($individuals as $individual)
+					$nb_individuals = count($individuals_goal);
+					for ($iIndividual = 0; $iIndividual < $nb_individuals; $iIndividual++)
 					{
+						$individual_goal = $individuals_goal[$iIndividual];
+						$individual = $individuals[$iIndividual];
 					?>
 							<tr>
 								<td>
+									<?php echo sprintf('%d',$individual_goal->getRed()->getColour()); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%d',$individual_goal->getGreen()->getColour()); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%d',$individual_goal->getBlue()->getColour()); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%.2f',$individual_goal->getAlpha()->getOpacity()); ?>
+								</td>
+								<td>
+									<div class="main_colour_rectangle" 
+										style="background-color: rgb(<?php echo $individual_goal->getRGBStringCSS(); ?>);">
+									</div>
+								</td>
+								<td>
 									<?php echo sprintf('%d',$individual->getRed()->getColour()); ?>
+									(<?php echo sprintf('%d',$individual->getRed()->getFitting()); ?>)
 								</td>
 								<td>
 									<?php echo sprintf('%d',$individual->getGreen()->getColour()); ?>
+									(<?php echo sprintf('%d',$individual->getGreen()->getFitting()); ?>)
 								</td>
 								<td>
 									<?php echo sprintf('%d',$individual->getBlue()->getColour()); ?>
+									(<?php echo sprintf('%d',$individual->getBlue()->getFitting()); ?>)
 								</td>
 								<td>
 									<?php echo sprintf('%.2f',$individual->getAlpha()->getOpacity()); ?>
+									(<?php echo sprintf('%d',$individual->getAlpha()->getFitting()); ?>)
+								</td>
+								<td>
+									<?php echo sprintf('%.2f',$individual->getFitting()); ?>
 								</td>
 								<td>
 									<div class="main_colour_rectangle" 
@@ -72,9 +109,6 @@ $population = new Population($file_test);
 					?>
 						</tbody>
 					</table>
-				</div>
-				<div class="col-md-9">
-					<?php require_once('index_suite.php'); ?>
 				</div>
 			</div>
 		</div>

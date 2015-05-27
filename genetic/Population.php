@@ -71,4 +71,10 @@ class Population
 	{
 		return $this->individuals;
 	}
+	
+	public function getImageGoal()
+	{
+		return $this->imageGoal;
+	}
+	
 }
