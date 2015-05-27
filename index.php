@@ -30,7 +30,7 @@ $population = new Population($file_test);
 			Image de test : <img src="<?php echo $file_test  ?>" class="img-responsive" alt="Responsive image">
 			
 			<div class="row">
-				<div class="col-md-6" class="text-center">
+				<div class="col-md-3">
 					<h3>Population init : </h3>
 					<table class="table table-bordered">
 						<thead>
@@ -39,7 +39,7 @@ $population = new Population($file_test);
 								<th>Blue</th>
 								<th>Green</th>
 								<th>Alpha</th>
-								<th>Copleur</th>
+								<th>Colour</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,10 +49,18 @@ $population = new Population($file_test);
 					{
 					?>
 							<tr>
-								<td><?php echo sprintf('%d',$individual->getRed()); ?></td>
-								<td><?php echo sprintf('%d',$individual->getGreen()); ?></td>
-								<td><?php echo sprintf('%d',$individual->getBlue()); ?></td>
-								<td><?php echo sprintf('%.2f',$individual->getAlpha()); ?></td>
+								<td>
+									<?php echo sprintf('%d',$individual->getRed()->getColour()); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%d',$individual->getGreen()->getColour()); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%d',$individual->getBlue()->getColour()); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%.2f',$individual->getAlpha()->getOpacity()); ?>
+								</td>
 								<td>
 									<div class="main_colour_rectangle" 
 										style="background-color: rgb(<?php echo $individual->getRGBStringCSS(); ?>);">
@@ -65,7 +73,7 @@ $population = new Population($file_test);
 						</tbody>
 					</table>
 				</div>
-				<div class="col-md-6" class="text-center">
+				<div class="col-md-9">
 					<?php require_once('index_suite.php'); ?>
 				</div>
 			</div>

@@ -7,6 +7,7 @@ class Population
 	private $MAX_ITERATIONS = 10;
 	private $imageGoal;
 	private $individuals = array();
+	private $nb_individuals; // would often get the total number so facto here
 	
 	/**
 	* Initialisation : 
@@ -33,6 +34,8 @@ class Population
 				$this->individuals[] = $unique_colours[$random_key];
 			}
 		}
+		
+		$this->nb_individuals = $width * $height;
 	}
 	
 	/* === EVOLVE ============================================== */
@@ -46,10 +49,20 @@ class Population
 		
 		do
 		{
-			
+			$this->evaluate();
 			
 			$iIteration++;
 		}while($iIteration < $this->MAX_ITERATIONS);
+	}
+	
+	private function evaluate()
+	{
+		$individuals_goal = $this->imageGoal->getIndividuals();
+		
+		for($iIndividual = 0; $iIndividual < $this->nb_individuals; $iIndividual++)
+		{
+			$this->individuals[$iIndividual]->evaluate($individuals_goal[$iIndividual]);
+		}
 	}
 	
 	/* === GET / SET =================================================== */

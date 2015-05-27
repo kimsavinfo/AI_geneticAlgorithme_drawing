@@ -3,6 +3,7 @@
 class GeneColour
 {
 	protected $colour;
+	protected $fitting;
 	
 	public function __construct($p_colour)
 	{
@@ -30,5 +31,15 @@ class GeneColour
 		{
 			$this->colour = $p_colour;
 		}
+	}
+	
+	public function getFitting()
+	{
+		return $this->fitting;
+	}
+	
+	public function evaluate($p_colour_goal)
+	{
+		$this->fitting = abs($this->colour - $p_colour_goal);
 	}
 }

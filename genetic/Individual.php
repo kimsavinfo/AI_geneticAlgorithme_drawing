@@ -39,17 +39,35 @@ class Individual
 		}
 	}
 	
+	public function evaluate($p_individual_goal)
+	{
+		$this->getRed()->evaluate($p_individual_goal->getRed()->getColour());
+		$this->getGreen()->evaluate($p_individual_goal->getGreen()->getColour());
+		$this->getBlue()->evaluate($p_individual_goal->getBlue()->getColour());
+		$this->getAlpha()->evaluate($p_individual_goal->getAlpha()->getOpacity());
+	}
+	
+	public function getFitting()
+	{
+		return $this->getRed()->getFitting()
+		+ $this->getGreen()->getFitting()
+		+ $this->getBlue()->getFitting()
+		+ $this->getAlpha()->getFitting();
+	}
+	
 	public function toString()
 	{
-		return 'Red : '.$this->getRed().
-		' Green : '.$this->getGreen().
-		' Blue : '.$this->getBlue().
-		' Alpha : '.$this->getAlpha();
+		return 'Red : '.$this->getRed()->getColour().
+		' Green : '.$this->getGreen()->getColour().
+		' Blue : '.$this->getBlue()->getColour().
+		' Alpha : '.$this->getAlpha()->getOpacity();
 	}
 	
 	public function getRGBStringCSS()
 	{
-		return $this->getRed().",".$this->getGreen().",".$this->getBlue();
+		return $this->getRed()->getColour().
+		",".$this->getGreen()->getColour().
+		",".$this->getBlue()->getColour();
 	}
 	
 	public function getRGBSStringRaw()
@@ -62,21 +80,21 @@ class Individual
 	
 	public function getRed()
 	{
-		return $this->genome[0]->getColour();
+		return $this->genome[0];
 	}
 	
 	public function getGreen()
 	{
-		return $this->genome[1]->getColour();
+		return $this->genome[1];
 	}
 	
 	public function getBlue()
 	{
-		return $this->genome[2]->getColour();
+		return $this->genome[2];
 	}
 	
 	public function getAlpha()
 	{
-		return $this->genome[3]->getOpacity();
+		return $this->genome[3];
 	}
 }
