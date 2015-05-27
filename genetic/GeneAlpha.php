@@ -16,6 +16,8 @@ class GeneAlpha
 		$this->setOpacity($p_opacity);
 	}
 	
+	/* === GET / SET =================================================== */
+	
 	public function getOpacity()
 	{
 		return $this->alpha;

@@ -9,6 +9,7 @@ require_once('GeneGreen.php');
 class Individual
 {
 	private $genome = array();
+	private $fitting = 865; // fitting max for init
 	
 	public function __construct($p_red, $p_green, $p_blue, $p_alpha)
 	{
@@ -28,10 +29,10 @@ class Individual
 		$nbAffetcedGenees = mt_rand(1,4);
 		
 		$genesIndexes = array(0,1,2,3);
-		
+		$nb_genes = $this->getNbGenes();
 		for($i=0;$i<$nbAffetcedGenees;$i++)
 		{
-			$rand_selected_gene = mt_rand(1,count($genesIndexes));
+			$rand_selected_gene = mt_rand(1, $nb_genes);
 			$this->genome[--$rand_selected_gene]->mutate();
 			
 			unset($genesIndexes[$rand_selected_gene]);
@@ -45,14 +46,48 @@ class Individual
 		$this->genome[1]->evaluate($p_individual_goal->getGreen()->getColour());
 		$this->genome[2]->evaluate($p_individual_goal->getBlue()->getColour());
 		$this->genome[3]->evaluate($p_individual_goal->getAlpha()->getOpacity());
+		
+		$this->calculateFitting();
+	}
+	
+	private function calculateFitting()
+	{
+		$this->fitting = $this->getRed()->getFitting()
+		+ $this->getGreen()->getFitting()
+		+ $this->getBlue()->getFitting()
+		+ $this->getAlpha()->getFitting();
+	}
+	
+	/* === GET / SET =================================================== */
+	
+	public function getRed()
+	{
+		return $this->genome[0];
+	}
+	
+	public function getGreen()
+	{
+		return $this->genome[1];
+	}
+	
+	public function getBlue()
+	{
+		return $this->genome[2];
+	}
+	
+	public function getAlpha()
+	{
+		return $this->genome[3];
+	}
+	
+	public function getNbGenes()
+	{
+		return count($this->genome);
 	}
 	
 	public function getFitting()
 	{
-		return $this->getRed()->getFitting()
-		+ $this->getGreen()->getFitting()
-		+ $this->getBlue()->getFitting()
-		+ $this->getAlpha()->getFitting();
+		return $this->fitting;
 	}
 	
 	public function toString()
@@ -78,23 +113,5 @@ class Individual
 		$this->getAlpha()->getOpacity3Digits();
 	}
 	
-	public function getRed()
-	{
-		return $this->genome[0];
-	}
 	
-	public function getGreen()
-	{
-		return $this->genome[1];
-	}
-	
-	public function getBlue()
-	{
-		return $this->genome[2];
-	}
-	
-	public function getAlpha()
-	{
-		return $this->genome[3];
-	}
 }

@@ -15,6 +15,8 @@ class GeneColour
 		$this->setColour(mt_rand(0,255));
 	}
 	
+	/* === GET / SET =================================================== */
+	
 	public function getColour()
 	{
 		return $this->colour;

@@ -5,6 +5,7 @@ require_once('genetic/Population.php');
 $file_test = "uploaded/france.png";
 
 $population = new Population($file_test);
+$population->evolve();
 
 ?>
 
@@ -35,7 +36,11 @@ $population = new Population($file_test);
 						<thead>
 							<tr>
 								<th colspan="5">Goal</th>
-								<th colspan="6">Genetic (fitting)</th>
+								<th colspan="6">
+									Genetic : 
+									<?php echo $population->getFitting(); ?> total fitting
+									for <?php echo $population->getNbGenerations(); ?> generations
+								</th>
 							</tr>
 							<tr>
 								<th>Red</th>

@@ -2,12 +2,26 @@
 
 require_once('ImageGoal.php');
 
+/**
+* Fitting : the bigger the farther from the goal image (individual colours).
+**/
+
 class Population
 {
-	private $MAX_ITERATIONS = 1;
+	private $MIN_FITTING = 100;
+	private $CROSSOVER_ACTIVATE_THRESHOLD = 50;
+	private $MUTATION_ACTIVATE_THRESHOLD = 10;
+	 // IF the algorithm did not succeed in reaching the MIN_FITTING
+	 // THEN it will stop to reproduce at the MAX_ITERATIONS generation
+	private $MAX_ITERATIONS = 1000;
+	
 	private $imageGoal;
 	private $individuals = array();
-	private $nb_individuals; // would often get the total number so facto here
+	// Optimisation : would often get the total numbers
+	private $nb_individuals; 
+	private $nb_genes;
+	// Stats
+	private $nb_generations = 0;
 	
 	/**
 	* Initialisation : 
@@ -31,18 +45,31 @@ class Population
 			for ($iColumn=0; $iColumn < $width; $iColumn++) 
 			{				
 				$random_key = array_rand($unique_colours, 1);
-				$individual = new Individual(
+				$this->individuals[] = new Individual(
 					$unique_colours[$random_key]->getRed()->getColour(), 
 					$unique_colours[$random_key]->getGreen()->getColour(), 
 					$unique_colours[$random_key]->getBlue()->getColour(), 
 					$unique_colours[$random_key]->getalpha()->getOpacity()
 				);
-				$this->individuals[] = $individual;
 			}
 		}
 		
 		$this->nb_individuals = $width * $height;
-		$this->evaluate();
+		$this->nb_genes = $this->individuals[0]->getNbGenes();
+		
+		$this->evaluate($this->individuals);
+	}
+	
+	/* === FITTING ============================================== */
+	
+	private function evaluate(&$p_individuals)
+	{
+		$individuals_goal = $this->imageGoal->getIndividuals();
+		
+		for($iIndividual = 0; $iIndividual < $this->nb_individuals; $iIndividual++)
+		{
+			$p_individuals[$iIndividual]->evaluate($individuals_goal[$iIndividual]);
+		}
 	}
 	
 	/* === EVOLVE ============================================== */
@@ -52,23 +79,101 @@ class Population
 	*/
 	public function evolve()
 	{
-		$iIteration = 0;
+		$this->nb_generations = 0;
+		$fitting = $this->getFitting();
 		
-		do
+		while($this->nb_generations < $this->MAX_ITERATIONS && $fitting > $this->MIN_FITTING)
 		{
-			$iIteration++;
+			// Selection and Reproduction
+			$new_individuals = $this->reproduce();
+			$this->evaluate($new_individuals);
 			
-			$this->evaluate();
-		}while($iIteration < $this->MAX_ITERATIONS);
+			// Who will survive ?
+			$this->survive($new_individuals, $fitting);
+			
+			$this->nb_generations++;
+		}
 	}
 	
-	private function evaluate()
+	private function reproduce()
 	{
-		$individuals_goal = $this->imageGoal->getIndividuals();
+		$new_individuals = array();
 		
 		for($iIndividual = 0; $iIndividual < $this->nb_individuals; $iIndividual++)
 		{
-			$this->individuals[$iIndividual]->evaluate($individuals_goal[$iIndividual]);
+			// Create a new individual
+			$random_crossover = mt_rand(0,100);
+			if($random_crossover > $this->CROSSOVER_ACTIVATE_THRESHOLD)
+			{
+				$new_indidvidual = $this->reproduce2Parents($iIndividual);
+			}
+			else
+			{
+				$new_indidvidual = $this->reproduce1Parent($iIndividual);
+			}
+			
+			// Mutation phase
+			$random_mutation = mt_rand(0,100);
+			if($random_mutation > $this->MUTATION_ACTIVATE_THRESHOLD)
+			{
+				$new_indidvidual->mutate();
+			}
+			
+			$new_individuals[] = $new_indidvidual;
+		}
+		
+		return $new_individuals;
+	}
+	
+	private function reproduce1Parent($p_iIndividual)
+	{
+		return new Individual(
+			$this->individuals[$p_iIndividual]->getRed()->getColour(), 
+			$this->individuals[$p_iIndividual]->getGreen()->getColour(), 
+			$this->individuals[$p_iIndividual]->getBlue()->getColour(), 
+			$this->individuals[$p_iIndividual]->getalpha()->getOpacity()
+		);
+	}
+	
+	private function reproduce2Parents($p_iIndividual)
+	{
+		$mother = $this->select1ParentForReproduction();
+		$father = $this->select1ParentForReproduction();
+		return $this->crossover($mother, $father);
+	}
+	
+	private function crossover($p_mother, $p_father)
+	{
+		$red = mt_rand(0,1) ? $p_mother->getRed()->getColour() : $p_father->getRed()->getColour();
+		$blue = mt_rand(0,1) ? $p_mother->getBlue()->getColour() : $p_father->getBlue()->getColour();
+		$green = mt_rand(0,1) ? $p_mother->getGreen()->getColour() : $p_father->getGreen()->getColour();
+		$alpha = mt_rand(0,1) ? $p_mother->getalpha()->getOpacity() : $p_father->getalpha()->getOpacity();
+		
+		return new Individual($red, $blue, $green, $alpha);
+	}
+	
+	private function select1ParentForReproduction()
+	{
+		return $this->individuals[mt_rand(0, ($this->nb_individuals-1))];
+	}
+	
+	// Calculate the fitting while keeping the elite
+	// Tournament : better fitting (younger if truce) surviving
+	private function survive($p_new_individuals , &$p_fitting)
+	{
+		$p_fitting = 0;
+		
+		for($iIndividual = 0; $iIndividual < $this->nb_individuals; $iIndividual++)
+		{
+			$actual_fitting = $this->individuals[$iIndividual]->getFitting();
+			$new_fitting = $p_new_individuals[$iIndividual]->getFitting();
+			
+			if($new_fitting <= $actual_fitting )
+			{
+				$this->individuals[$iIndividual] = $p_new_individuals[$iIndividual];
+			}
+			
+			$p_fitting += $this->individuals[$iIndividual]->getFitting();
 		}
 	}
 	
@@ -84,4 +189,20 @@ class Population
 		return $this->imageGoal;
 	}
 	
+	public function getFitting()
+	{
+		$fitting = 0;
+		
+		for($iIndividual = 0; $iIndividual < $this->nb_individuals; $iIndividual++)
+		{
+			$fitting += $this->individuals[$iIndividual]->getFitting();
+		}
+		
+		return $fitting;
+	}
+	
+	public function getNbGenerations()
+	{
+		return $this->nb_generations;
+	}
 }
