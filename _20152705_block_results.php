@@ -18,7 +18,7 @@ if(isset($_SESSION['upload_file']))
 	</div>
 	<div class="col-md-6" class="text-center">
 		<h2>
-			<?php echo count($unique_colours); ?> different colours
+			Step 1 : <?php echo count($unique_colours); ?> different colours
 			<!-- Button trigger modal : rf index.php, js bottom section -->
 			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalUniqueColours">
 				Details

@@ -1,7 +1,11 @@
 <?php
-require_once('params.php');
-require_once('libs/file_manager.php');
-require_once('genetic/ImageGoal.php');
+
+require_once('genetic/Population.php');
+
+$file_test = "uploaded/france.png";
+
+$population = new Population($file_test);
+
 ?>
 
 <!DOCTYPE html>
@@ -22,43 +26,51 @@ require_once('genetic/ImageGoal.php');
 		<link href="css/main.css" rel="stylesheet">
 	</head>
 	<body>
-
-		<div class="jumbotron">
-			<div class="text-center">
-				<h1>Supervised learning with neural network</h1>
+		<div class="container">
+			Image de test : <img src="<?php echo $file_test  ?>" class="img-responsive" alt="Responsive image">
+			
+			<div class="row">
+				<div class="col-md-6" class="text-center">
+					<h3>Population init : </h3>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Red</th>
+								<th>Blue</th>
+								<th>Green</th>
+								<th>Alpha</th>
+								<th>Copleur</th>
+							</tr>
+						</thead>
+						<tbody>
+					<?php
+					$individuals = $population->getIndividuals();
+					foreach ($individuals as $individual)
+					{
+					?>
+							<tr>
+								<td><?php echo sprintf('%d',$individual->getRed()); ?></td>
+								<td><?php echo sprintf('%d',$individual->getGreen()); ?></td>
+								<td><?php echo sprintf('%d',$individual->getBlue()); ?></td>
+								<td><?php echo sprintf('%.2f',$individual->getAlpha()); ?></td>
+								<td>
+									<div class="main_colour_rectangle" 
+										style="background-color: rgb(<?php echo $individual->getRGBStringCSS(); ?>);">
+									</div>
+								</td>
+							</tr>
+					<?php
+					}
+					?>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-6" class="text-center">
+					<?php require_once('index_suite.php'); ?>
+				</div>
 			</div>
 		</div>
 		
-		<div class="container">
-			<?php require_once('block_upload.php'); ?>
-			
-<?php
-	if (isset($_SESSION['message_danger']))
-	{
-?>
-			<?php require_once('block_error_msg.php'); ?>
-<?php
-	} 
-	else if(isset($_SESSION['upload_file']))
-	{
-?>
-			<?php require_once('block_results.php'); ?>
-<?php
-	}
-?>
-		</div>
-	
-		<div class="footer">
-			<div class="text-center">
-				<p>
-					Arthur LAMBERT && Kim SAVAROCHE
-				</p>
-				<p>
-					Date : 24/05/2015
-				</p>
-			</div>
-		</div>
-
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -70,7 +82,3 @@ require_once('genetic/ImageGoal.php');
 		</scipt>
 	</body>
 </html>
-
-<?php
-	session_destroy();
-?>

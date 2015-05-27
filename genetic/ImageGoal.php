@@ -4,19 +4,24 @@ require_once('Individual.php');
 
 class ImageGoal
 {	
+	private $width;
+	private $height;
 	private $individuals = array(); // all colours
 	private $unique_colours = array(); // list all different colours but only 1 time
 	
-	public function __construct($p_path, $p_max_main_colours = 1)
+	public function __construct($p_path)
 	{
 		$image = imagecreatefrompng($p_path);
 		$size = getimagesize($p_path);
 		
-		for ($iLine=0; $iLine < $size[0]; $iLine++) 
+		$this->width = $size[0];
+		$this->height = $size[1];
+		
+		for ($iLine=0; $iLine < $size[1]; $iLine++) 
 		{
-			for ($iColumn=0; $iColumn < $size[1]; $iColumn++) 
+			for ($iColumn=0; $iColumn < $size[0]; $iColumn++) 
 			{				
-				$rgb = imagecolorat($image, $iLine, $iColumn);
+				$rgb = imagecolorat($image, $iColumn, $iLine);
 				$colours = imagecolorsforindex($image, $rgb);
 				
 				$individual = new Individual(
@@ -52,5 +57,15 @@ class ImageGoal
 	public function getUniqueColours()
 	{
 		return $this->unique_colours;
+	}
+	
+	public function getWidth()
+	{
+		return $this->width;
+	}
+	
+	public function getHeight()
+	{
+		return $this->height;
 	}
 }
