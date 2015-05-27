@@ -2,8 +2,8 @@
 
 class GeneAlpha
 {
-	private $alpha;
-	private $fitting;
+	private $alpha = 0;
+	private $fitting = 100; // fitting max for init
 	
 	public function __construct($p_opacity)
 	{
@@ -12,7 +12,7 @@ class GeneAlpha
 	
 	public function mutate()
 	{
-		$p_opacity = (float) mt_rand(0,100)/100;
+		$p_opacity = (float)mt_rand(0,100)/100;
 		$this->setOpacity($p_opacity);
 	}
 	
@@ -41,6 +41,6 @@ class GeneAlpha
 	
 	public function evaluate($p_opacity_goal)
 	{
-		$this->fitting = abs($this->alpha - $p_opacity_goal);
+		$this->fitting = abs($this->alpha - $p_opacity_goal) * 100;
 	}
 }

@@ -33,6 +33,7 @@ class ImageGoal
 				$this->addUniqueColour($individual);
 			}
 		}
+		
 		ksort($this->unique_colours);
 	}
 	
@@ -43,7 +44,13 @@ class ImageGoal
 		$colour_key = $p_individual->getRGBSStringRaw();
 		if(!isset($this->unique_colours[$colour_key]))
 		{
-			$this->unique_colours[$colour_key] = $p_individual;
+			$individual = new Individual(
+				$p_individual->getRed()->getColour(), 
+				$p_individual->getGreen()->getColour(), 
+				$p_individual->getBlue()->getColour(), 
+				$p_individual->getalpha()->getOpacity()
+			);
+			$this->unique_colours[$colour_key] = $individual;
 		}
 	}
 	

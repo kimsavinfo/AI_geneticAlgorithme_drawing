@@ -5,7 +5,6 @@ require_once('genetic/Population.php');
 $file_test = "uploaded/france.png";
 
 $population = new Population($file_test);
-$population->evolve();
 
 ?>
 
@@ -53,15 +52,15 @@ $population->evolve();
 							</tr>
 						</thead>
 						<tbody>
-					<?php
-					$individuals_goal = $population->getImageGoal()->getIndividuals();
-					$individuals = $population->getIndividuals();
-					$nb_individuals = count($individuals_goal);
-					for ($iIndividual = 0; $iIndividual < $nb_individuals; $iIndividual++)
-					{
-						$individual_goal = $individuals_goal[$iIndividual];
-						$individual = $individuals[$iIndividual];
-					?>
+<?php
+$individuals_goal = $population->getImageGoal()->getIndividuals();
+$individuals = $population->getIndividuals();
+$nb_individuals = count($individuals_goal);
+for ($iIndividual = 0; $iIndividual < $nb_individuals; $iIndividual++)
+{
+	$individual_goal = $individuals_goal[$iIndividual];
+	$individual = $individuals[$iIndividual];
+?>
 							<tr>
 								<td>
 									<?php echo sprintf('%d',$individual_goal->getRed()->getColour()); ?>
@@ -105,9 +104,9 @@ $population->evolve();
 									(<?php echo sprintf('%d',$individual->getAlpha()->getFitting()); ?>)
 								</td>
 							</tr>
-					<?php
-					}
-					?>
+<?php
+}
+?>
 						</tbody>
 					</table>
 				</div>

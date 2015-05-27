@@ -2,8 +2,8 @@
 
 class GeneColour
 {
-	protected $colour;
-	protected $fitting;
+	protected $colour = 0;
+	protected $fitting = 255; // fitting max for init
 	
 	public function __construct($p_colour)
 	{

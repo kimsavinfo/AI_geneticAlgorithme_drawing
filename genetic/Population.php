@@ -4,7 +4,7 @@ require_once('ImageGoal.php');
 
 class Population
 {
-	private $MAX_ITERATIONS = 10;
+	private $MAX_ITERATIONS = 1;
 	private $imageGoal;
 	private $individuals = array();
 	private $nb_individuals; // would often get the total number so facto here
@@ -31,11 +31,18 @@ class Population
 			for ($iColumn=0; $iColumn < $width; $iColumn++) 
 			{				
 				$random_key = array_rand($unique_colours, 1);
-				$this->individuals[] = $unique_colours[$random_key];
+				$individual = new Individual(
+					$unique_colours[$random_key]->getRed()->getColour(), 
+					$unique_colours[$random_key]->getGreen()->getColour(), 
+					$unique_colours[$random_key]->getBlue()->getColour(), 
+					$unique_colours[$random_key]->getalpha()->getOpacity()
+				);
+				$this->individuals[] = $individual;
 			}
 		}
 		
 		$this->nb_individuals = $width * $height;
+		$this->evaluate();
 	}
 	
 	/* === EVOLVE ============================================== */
@@ -49,9 +56,9 @@ class Population
 		
 		do
 		{
-			$this->evaluate();
-			
 			$iIteration++;
+			
+			$this->evaluate();
 		}while($iIteration < $this->MAX_ITERATIONS);
 	}
 	

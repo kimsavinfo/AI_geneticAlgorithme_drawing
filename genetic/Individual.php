@@ -41,10 +41,10 @@ class Individual
 	
 	public function evaluate($p_individual_goal)
 	{
-		$this->getRed()->evaluate($p_individual_goal->getRed()->getColour());
-		$this->getGreen()->evaluate($p_individual_goal->getGreen()->getColour());
-		$this->getBlue()->evaluate($p_individual_goal->getBlue()->getColour());
-		$this->getAlpha()->evaluate($p_individual_goal->getAlpha()->getOpacity());
+		$this->genome[0]->evaluate($p_individual_goal->getRed()->getColour());
+		$this->genome[1]->evaluate($p_individual_goal->getGreen()->getColour());
+		$this->genome[2]->evaluate($p_individual_goal->getBlue()->getColour());
+		$this->genome[3]->evaluate($p_individual_goal->getAlpha()->getOpacity());
 	}
 	
 	public function getFitting()
@@ -72,10 +72,10 @@ class Individual
 	
 	public function getRGBSStringRaw()
 	{		
-		return $this->genome[0]->getColour3Digits().
-		$this->genome[1]->getColour3Digits().
-		$this->genome[2]->getColour3Digits().
-		$this->genome[3]->getOpacity3Digits();
+		return $this->getRed()->getColour3Digits().
+		$this->getGreen()->getColour3Digits().
+		$this->getBlue()->getColour3Digits().
+		$this->getAlpha()->getOpacity3Digits();
 	}
 	
 	public function getRed()
