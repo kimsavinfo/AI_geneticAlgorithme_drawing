@@ -1,6 +1,7 @@
 <?php
 
 require_once('ImageGoal.php');
+require_once('libs/Chrono.php');
 
 /**
 * Fitting : the bigger the farther from the goal image (individual colours).
@@ -8,13 +9,13 @@ require_once('ImageGoal.php');
 
 class Population
 {
-	private $MIN_FITTING_POURCENTAGE = 90; // will calculate MIN_FITTING accepted
+	private $MIN_FITTING_POURCENTAGE = 100; // will calculate MIN_FITTING accepted
 	private $MIN_FITTING; // total fitting accepted
 	private $CROSSOVER_ACTIVATE_THRESHOLD = 40; // percentage, the odds to happen
 	private $MUTATION_ACTIVATE_THRESHOLD = 90; // percentage, the odds to happen
 	 // IF the algorithm did not succeed in reaching the MIN_FITTING
 	 // THEN it will stop to reproduce at the MAX_ITERATIONS generation
-	private $MAX_ITERATIONS = 10000;
+	private $MAX_ITERATIONS = 1000;
 	
 	private $imageGoal;
 	private $individuals = array();
@@ -23,6 +24,7 @@ class Population
 	private $nb_genes;
 	// Stats
 	private $nb_generations = 0;
+	private $chrono;
 	
 	/**
 	* Initialisation : 
@@ -57,8 +59,9 @@ class Population
 		
 		$this->nb_individuals = $width * $height;
 		$this->nb_genes = $this->individuals[0]->getNbGenes();
-		$this->MIN_FITTING = $this->MIN_FITTING_POURCENTAGE * $this->nb_genes / 100;
-		
+		$this->MIN_FITTING = $this->nb_genes * $this->MIN_FITTING_POURCENTAGE / 100;
+		$this->chrono = new Chrono();
+
 		$this->evaluate($this->individuals);
 	}
 	
@@ -81,6 +84,8 @@ class Population
 	*/
 	public function evolve()
 	{
+		$this->chrono->start();
+
 		$this->nb_generations = 0;
 		$fitting = $this->getFitting();
 		
@@ -95,6 +100,8 @@ class Population
 			
 			$this->nb_generations++;
 		}
+
+		$this->chrono->end();
 	}
 	
 	private function reproduce()
@@ -224,7 +231,11 @@ class Population
 			array("legend" => "Minimal picture's percentage difference accepted", "value" => $this->MIN_FITTING_POURCENTAGE, "unity" => "%" ), 
 			array("legend" => "Percentage odd a CROSSOVER happens", "value" => $this->CROSSOVER_ACTIVATE_THRESHOLD, "unity" => "%" ), 
 			array("legend" => "Percentage odd a MUTATION happens", "value" => $this->MUTATION_ACTIVATE_THRESHOLD, "unity" => "%" ), 
-			array("legend" => "Maximum iterations", "value" => $this->MAX_ITERATIONS, "unity" => "generations" )
+			array("legend" => "Maximum iterations", "value" => $this->MAX_ITERATIONS, "unity" => "generations" ),
+			array("legend" => "Start", "value" => $this->chrono->getStartHis(), "unity" => "HH:mm:ss" ),
+			array("legend" => "End", "value" => $this->chrono->getEndHis(), "unity" => "HH:mm:ss" ),
+			array("legend" => "Duration", "value" => $this->chrono->getDurationHis(), "unity" => "HH:mm:ss" )
+
 		);
 	}
 }
