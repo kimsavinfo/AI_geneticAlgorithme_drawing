@@ -58,7 +58,7 @@ foreach ($parameters as $param)
 						<thead>
 							<tr>
 								<th colspan="5">
-									Goal <?php echo $nb_individuals; ?>
+									Goal : <?php echo $nb_individuals; ?> pixels
 								</th>
 								<th colspan="6">
 									Genetic : 
