@@ -2,12 +2,21 @@
 
 require_once('genetic/Population.php');
 
+ini_set('max_execution_time', 0); 
+
 $file_test = "uploaded/france.png";
 // $file_test = "uploaded/mario-pixelise.png";
 
 $population = new Population($file_test);
 $population->evolve();
 
+
+$individuals_goal = $population->getImageGoal()->getIndividuals();
+$individuals = $population->getIndividuals();
+$nb_individuals = count($individuals_goal);
+$parameters = $population->getParameters();
+
+$stringToGeneratePicture = $population->getRGBAStringPicture();
 ?>
 
 <!DOCTYPE html>
@@ -29,14 +38,28 @@ $population->evolve();
 	</head>
 	<body>
 		<div class="container">
-			Image de test : <img src="<?php echo $file_test  ?>" class="img-responsive" alt="Responsive image">
+			<div class="row">
+				<div class="col-md-6">
+					Image de test : <img src="<?php echo $file_test; ?>" class="img-responsive" alt="Responsive image">
+				</div>
+				<div class="col-md-6">
+<?php
+foreach ($parameters as $param) 
+{
+	echo "<p>".$param['legend']." : ".$param['value']."  ".$param['unity']."</p>";
+}
+?>
+				</div>
+			</div>
 			<hr/>
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th colspan="5">Goal</th>
+								<th colspan="5">
+									Goal <?php echo $nb_individuals; ?>
+								</th>
 								<th colspan="6">
 									Genetic : 
 									<?php echo $population->getFitting(); ?> total fitting
@@ -59,9 +82,6 @@ $population->evolve();
 						</thead>
 						<tbody>
 <?php
-$individuals_goal = $population->getImageGoal()->getIndividuals();
-$individuals = $population->getIndividuals();
-$nb_individuals = count($individuals_goal);
 for ($iIndividual = 0; $iIndividual < $nb_individuals; $iIndividual++)
 {
 	$individual_goal = $individuals_goal[$iIndividual];

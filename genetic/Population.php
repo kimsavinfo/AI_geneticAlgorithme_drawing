@@ -8,12 +8,13 @@ require_once('ImageGoal.php');
 
 class Population
 {
-	private $MIN_FITTING = 100;
-	private $CROSSOVER_ACTIVATE_THRESHOLD = 50;
-	private $MUTATION_ACTIVATE_THRESHOLD = 10;
+	private $MIN_FITTING_POURCENTAGE = 90; // will calculate MIN_FITTING accepted
+	private $MIN_FITTING; // total fitting accepted
+	private $CROSSOVER_ACTIVATE_THRESHOLD = 40; // percentage, the odds to happen
+	private $MUTATION_ACTIVATE_THRESHOLD = 90; // percentage, the odds to happen
 	 // IF the algorithm did not succeed in reaching the MIN_FITTING
 	 // THEN it will stop to reproduce at the MAX_ITERATIONS generation
-	private $MAX_ITERATIONS = 1000;
+	private $MAX_ITERATIONS = 10000;
 	
 	private $imageGoal;
 	private $individuals = array();
@@ -56,6 +57,7 @@ class Population
 		
 		$this->nb_individuals = $width * $height;
 		$this->nb_genes = $this->individuals[0]->getNbGenes();
+		$this->MIN_FITTING = $this->MIN_FITTING_POURCENTAGE * $this->nb_genes / 100;
 		
 		$this->evaluate($this->individuals);
 	}
@@ -103,7 +105,7 @@ class Population
 		{
 			// Create a new individual
 			$random_crossover = mt_rand(0,100);
-			if($random_crossover > $this->CROSSOVER_ACTIVATE_THRESHOLD)
+			if($random_crossover < $this->CROSSOVER_ACTIVATE_THRESHOLD)
 			{
 				$new_indidvidual = $this->reproduce2Parents($iIndividual);
 			}
@@ -114,7 +116,7 @@ class Population
 			
 			// Mutation phase
 			$random_mutation = mt_rand(0,100);
-			if($random_mutation > $this->MUTATION_ACTIVATE_THRESHOLD)
+			if($random_mutation < $this->MUTATION_ACTIVATE_THRESHOLD)
 			{
 				$new_indidvidual->mutate();
 			}
@@ -192,17 +194,37 @@ class Population
 	public function getFitting()
 	{
 		$fitting = 0;
-		
 		for($iIndividual = 0; $iIndividual < $this->nb_individuals; $iIndividual++)
 		{
 			$fitting += $this->individuals[$iIndividual]->getFitting();
 		}
-		
 		return $fitting;
 	}
 	
 	public function getNbGenerations()
 	{
 		return $this->nb_generations;
+	}
+
+	public function getRGBAStringPicture()
+	{
+		$string = "";
+		for($iIndividual = 0; $iIndividual < $this->nb_individuals; $iIndividual++)
+		{
+			$string .= $this->individuals[$iIndividual]->getRGBAStringPicture();
+			$string .= $iIndividual < ($this->nb_individuals - 1) ? "," : "";
+		}
+		return $string;
+	}
+
+	public function getParameters()
+	{
+		return array(
+			array("legend" => "Minimal differences accepted (all RGBA axes)", "value" => $this->MIN_FITTING, "unity" => "fitting" ), 
+			array("legend" => "Minimal picture's percentage difference accepted", "value" => $this->MIN_FITTING_POURCENTAGE, "unity" => "%" ), 
+			array("legend" => "Percentage odd a CROSSOVER happens", "value" => $this->CROSSOVER_ACTIVATE_THRESHOLD, "unity" => "%" ), 
+			array("legend" => "Percentage odd a MUTATION happens", "value" => $this->MUTATION_ACTIVATE_THRESHOLD, "unity" => "%" ), 
+			array("legend" => "Maximum iterations", "value" => $this->MAX_ITERATIONS, "unity" => "generations" )
+		);
 	}
 }

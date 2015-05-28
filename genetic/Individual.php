@@ -112,6 +112,12 @@ class Individual
 		$this->getBlue()->getColour3Digits().
 		$this->getAlpha()->getOpacity3Digits();
 	}
-	
-	
+
+	public function getRGBAStringPicture()
+	{
+		return $this->getRed()->getColour().",".
+			$this->getGreen()->getColour().",".
+			$this->getBlue()->getColour().",".
+			$this->getAlpha()->getOpacity();
+	}
 }
