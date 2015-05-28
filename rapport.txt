@@ -14,3 +14,6 @@ Stocker l’image uploadée dans dossier tempo avec toujours le même nom
 php_ini : 128 MB max memory_limit
 
 26/05/2015 : a pensé à l'algo k-means pour trouver les couleurs princpales mais on n'explorerait pas toutes les routes...
+
+
+max_execution_time = 120 -> 0
