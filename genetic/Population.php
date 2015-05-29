@@ -11,11 +11,11 @@ class Population
 {
 	private $MIN_FITTING_POURCENTAGE = 100; // will calculate MIN_FITTING accepted
 	private $MIN_FITTING; // total fitting accepted
-	private $CROSSOVER_ACTIVATE_THRESHOLD = 50; // percentage, the odds to happen
-	private $MUTATION_ACTIVATE_THRESHOLD = 30; // percentage, the odds to happen
+	private $CROSSOVER_ACTIVATE_THRESHOLD = 10; // percentage, the odds to happen
+	private $MUTATION_ACTIVATE_THRESHOLD = 03; // percentage, the odds to happen
 	 // IF the algorithm did not succeed in reaching the MIN_FITTING
 	 // THEN it will stop to reproduce at the MAX_ITERATIONS generation
-	private $MAX_ITERATIONS = 100;
+	private $MAX_ITERATIONS = 500;
 	
 	private $imageGoal;
 	private $individuals = array();
@@ -42,12 +42,27 @@ class Population
 		$width = $this->imageGoal->getWidth();
 		$height = $this->imageGoal->getHeight();
 		$unique_colours = $this->imageGoal->getUniqueColours();
+
+		$iUniqueColour = 0;
+		$keys_unique_colors = array_keys($unique_colours);
+		$nb_unique_colours = count($keys_unique_colors);
 		
 		for ($iLine=0; $iLine < $height; $iLine++) 
 		{
 			for ($iColumn=0; $iColumn < $width; $iColumn++) 
 			{				
-				$random_key = array_rand($unique_colours, 1);
+				if($iUniqueColour < $nb_unique_colours )
+				{
+					// Don't be racist, and create at least 1 pixel
+					// for each colour ;)
+					$random_key = $keys_unique_colors[$iUniqueColour];
+					$iUniqueColour++;
+				}
+				else
+				{
+					$random_key = array_rand($unique_colours, 1);	
+				}
+
 				$this->individuals[] = new Individual(
 					$unique_colours[$random_key]->getRed()->getColour(), 
 					$unique_colours[$random_key]->getGreen()->getColour(), 
