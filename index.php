@@ -1,7 +1,17 @@
 <?php
-ini_set('max_execution_time', 0); 
 
-$file_test = "uploaded/france.png";
+require_once('config.php');
+
+// Get all pixels from the image
+$file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
+$pixels_goal = array();
+$palette = array();
+importPixelsRGBA($file_test, $pixels_goal, $palette);
+
+// Initialize the population
+$nb_pixels = count($pixels_goal);
+$pixels_genetic = array();
+initPopulation($pixels_genetic, $palette, $nb_pixels);
 
 ?>
 
@@ -33,6 +43,92 @@ $file_test = "uploaded/france.png";
 				</div>
 			</div>
 			<hr/>
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="5">
+									Goal : <?php echo $nb_pixels; ?> pixels
+									(<?php echo count($palette); ?> colours in the palette)
+								</th>
+								<th colspan="6">
+									Genetic : 
+									<?php echo "TODO"; ?> total fitting
+									for <?php echo "TODO"; ?> generations
+								</th>
+							</tr>
+							<tr>
+								<th>Red</th>
+								<th>Blue</th>
+								<th>Green</th>
+								<th>Alpha</th>
+								<th>Colour</th>
+								<th>Colour</th>
+								<th>Fitting total</th>
+								<th>Red</th>
+								<th>Blue</th>
+								<th>Green</th>
+								<th>Alpha</th>
+							</tr>
+						</thead>
+						<tbody>
+<?php
+for ($iPixels = 0; $iPixels < $nb_pixels; $iPixels++)
+{
+	$pixel_goal = $pixels_goal[$iPixels];
+	$pixel_genetic = $pixels_genetic[$iPixels];
+?>
+							<tr>
+								<td>
+									<?php echo sprintf('%d',$pixel_goal[0]); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%d',$pixel_goal[1]); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%d',$pixel_goal[2]); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%.2f',$pixel_goal[3]); ?>
+								</td>
+								<td>
+									<div class="main_colour_rectangle" 
+										style="background-color: rgb(<?php echo getRGBStringCSS($pixel_goal); ?>);">
+									</div>
+								</td>
+								<td>
+									<div class="main_colour_rectangle" 
+										style="background-color: rgb(<?php echo getRGBStringCSS($pixel_genetic); ?>);">
+									</div>
+								</td>
+								<td>
+									<?php echo sprintf('%.2f', getFittingTotal($pixel_goal, $pixel_genetic) ); ?>
+								</td>
+								<td>
+									<?php echo sprintf('%d',$pixel_genetic[0]); ?>
+									(<?php echo sprintf('%d', getFitting($pixel_genetic[0], $pixel_goal[0]) ); ?>)
+								</td>
+								<td>
+									<?php echo sprintf('%d',$pixel_genetic[1]); ?>
+									(<?php echo sprintf('%d', getFitting($pixel_genetic[1], $pixel_goal[1]) ); ?>)
+								</td>
+								<td>
+									<?php echo sprintf('%d',$pixel_genetic[2]); ?>
+									(<?php echo sprintf('%d', getFitting($pixel_genetic[2], $pixel_goal[2]) ); ?>)
+								</td>
+								<td>
+									<?php echo sprintf('%d',$pixel_genetic[3]); ?>
+									(<?php echo sprintf('%d', getFitting($pixel_genetic[3], $pixel_goal[3], true) ); ?>)
+								</td>
+							</tr>
+<?php
+}
+?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 		
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
