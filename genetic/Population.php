@@ -53,8 +53,8 @@ class Population
 			{				
 				if($iUniqueColour < $nb_unique_colours )
 				{
-					// Don't be racist, and create at least 1 pixel
-					// for each colour ;)
+					// Don't be racist ;)
+					// Create at least 1 pixel for each colour
 					$random_key = $keys_unique_colors[$iUniqueColour];
 					$iUniqueColour++;
 				}

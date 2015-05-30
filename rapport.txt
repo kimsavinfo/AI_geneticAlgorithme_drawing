@@ -28,3 +28,11 @@ Pistes suivies pour alog
 	on se rapproche vite mais on stagne à la fin
 4. 1 le meilleur, et 2 avec 1 meilleur et 1 hasard : 
 	meilleur pour orienter et le hasard pour nuancer
+
+
+Pour gagner du temps dans l'exécution de l'algo on stocke dans des tableaux les valeurs des pixels uniques et tous les pixels.
+Les fichiers contenant les tableaux ont trois tableaux contenant diverses informations : 
+
+$image_infos : contient les infos comme la hauteur et largeur de l'image
+$image_unique : contient les pixels qui sont uniques un à un 
+$image_individuals : contient tous les pixels de l'image dans l'ordre
