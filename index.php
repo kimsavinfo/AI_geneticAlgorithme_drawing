@@ -12,6 +12,7 @@ $population->evolve();
 
 
 $individuals_goal = $population->getImageGoal()->getIndividuals();
+$unique_colours = $population->getImageGoal()->getUniqueColours();
 $individuals = $population->getIndividuals();
 $nb_individuals = count($individuals_goal);
 $parameters = $population->getParameters();
@@ -59,6 +60,7 @@ foreach ($parameters as $param)
 							<tr>
 								<th colspan="5">
 									Goal : <?php echo $nb_individuals; ?> pixels
+									(<?php echo count($unique_colours); ?> unique colours)
 								</th>
 								<th colspan="6">
 									Genetic : 

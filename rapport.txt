@@ -16,4 +16,15 @@ php_ini : 128 MB max memory_limit
 26/05/2015 : a pensé à l'algo k-means pour trouver les couleurs princpales mais on n'explorerait pas toutes les routes...
 
 
-max_execution_time = 120 -> 0
+max_execution_time = 120 -> 0 // passe par ini_set
+
+
+Pistes suivies pour alog
+1. tout au hasard
+2. 1 hasard et 2 avec les 2 meilleurs : mauvais, n'obtiendra jamais le bon résultat
+3. 1 hasard, et 2 avec 1 meilleur et 1 hasard : 
+	meilleur pour orienter et le hasard pour nuancer
+	version stable mais manque de performance vers la fin.
+	on se rapproche vite mais on stagne à la fin
+4. 1 le meilleur, et 2 avec 1 meilleur et 1 hasard : 
+	meilleur pour orienter et le hasard pour nuancer
