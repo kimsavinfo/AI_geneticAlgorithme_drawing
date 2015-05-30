@@ -23,3 +23,13 @@ function lib_getListImages($p_directory)
 
 	return $list_imgs;
 }
+
+/** ===================================================================
+
+=================================================================== **/
+
+function lib_exportPNGPixelsToTXT()
+{
+	$pixels = array();
+	
+}

@@ -8,7 +8,7 @@ $file_test = "uploaded/france.png";
 // $file_test = "uploaded/mario-pixelise.png";
 
 $population = new Population($file_test);
-$population->evolve();
+// $population->evolve();
 
 
 $individuals_goal = $population->getImageGoal()->getIndividuals();
