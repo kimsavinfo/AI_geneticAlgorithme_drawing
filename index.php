@@ -2,8 +2,14 @@
 
 require_once('config.php');
 
+// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
+$file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario_pixelise.png";
+
+
+// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario.png";
+
+
 // Get all pixels from the image
-$file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
 $pixels_goal = array();
 $palette = array();
 importPixelsRGBA($file_test, $pixels_goal, $palette);
@@ -13,6 +19,9 @@ $nb_pixels = count($pixels_goal);
 $pixels_genetic = array();
 initPopulation($pixels_genetic, $palette, $nb_pixels);
 
+// Evolving
+$stats = array();
+evolve($pixels_genetic, $pixels_goal, $stats, $palette)
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +48,31 @@ initPopulation($pixels_genetic, $palette, $nb_pixels);
 					Image de test : <img src="<?php echo $file_test; ?>" class="img-responsive" alt="Responsive image">
 				</div>
 				<div class="col-md-6">
-
+					<p>
+						Minimal differences accepted (all RGBA axes) : <?php echo $stats['min_fitting']; ?>
+					</p>
+					<p>
+						Minimal picture's percentage difference accepted : 
+						<?php echo $GLOBALS['MIN_FITTING_POURCENTAGE']; ?>
+					</p>
+					<p>
+						Percentage odd a CROSSOVER happens : <?php echo $GLOBALS['CROSSOVER_ACTIVATE_THRESHOLD']; ?>
+					</p>
+					<p>
+						Percentage odd a MUTATION happens : <?php echo $GLOBALS['MUTATION_ACTIVATE_THRESHOLD']; ?>
+					</p>
+					<p>
+						Maximum iterations : <?php echo $GLOBALS['MAX_ITERATIONS']; ?>
+					</p>
+					<p>
+						Starting date : <?php echo getDateHis($stats['microtime_start']); ?>
+					</p>
+					<p>
+						Ending date : <?php echo getDateHis($stats['microtime_end']); ?>
+					</p>
+					<p>
+						Duration : <?php echo getDurationHis($stats['microtime_start'], $stats['microtime_end']); ?>
+					</p
 				</div>
 			</div>
 			<hr/>
@@ -54,8 +87,8 @@ initPopulation($pixels_genetic, $palette, $nb_pixels);
 								</th>
 								<th colspan="6">
 									Genetic : 
-									<?php echo "TODO"; ?> total fitting
-									for <?php echo "TODO"; ?> generations
+									<?php echo $stats['fitting_total']; ?> total fitting
+									for <?php echo $stats['nb_generations']; ?> generations
 								</th>
 							</tr>
 							<tr>
@@ -103,7 +136,7 @@ for ($iPixels = 0; $iPixels < $nb_pixels; $iPixels++)
 									</div>
 								</td>
 								<td>
-									<?php echo sprintf('%.2f', getFittingTotal($pixel_goal, $pixel_genetic) ); ?>
+									<?php echo sprintf('%.2f', getFittingPixel($pixel_goal, $pixel_genetic) ); ?>
 								</td>
 								<td>
 									<?php echo sprintf('%d',$pixel_genetic[0]); ?>
