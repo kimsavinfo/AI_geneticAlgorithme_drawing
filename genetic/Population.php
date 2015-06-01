@@ -59,10 +59,20 @@ class Population
 		
 		$this->nb_individuals = $width * $height;
 		$this->nb_genes = $this->individuals[0]->getNbGenes();
-		$this->MIN_FITTING = $this->nb_genes * $this->MIN_FITTING_POURCENTAGE / 100;
+		$this->calculateMinFitting();
 		$this->chrono = new Chrono();
 
 		$this->evaluate($this->individuals);
+	}
+	
+	private function calculateMinFitting()
+	{
+		$this->MIN_FITTING = 0;
+		
+		if($this->MIN_FITTING_POURCENTAGE < 100)
+		{
+			$this->MIN_FITTING = $this->nb_genes * $this->MIN_FITTING_POURCENTAGE / 100;
+		}
 	}
 	
 	/* === FITTING ============================================== */
