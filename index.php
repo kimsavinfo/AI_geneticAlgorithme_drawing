@@ -4,8 +4,8 @@ require_once('genetic/Population.php');
 
 ini_set('max_execution_time', 0); 
 
-$file_test = "uploaded/france.png";
-// $file_test = "uploaded/mario-pixelise.png";
+// $file_test = "uploaded/france.png";
+$file_test = "uploaded/mario-pixelise.png";
 
 $population = new Population($file_test);
 $population->evolve();

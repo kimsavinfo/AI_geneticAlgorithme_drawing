@@ -16,6 +16,11 @@ class GeneAlpha
 		$this->setOpacity($p_opacity);
 	}
 	
+	public function calculateFitting($p_opacity)
+	{
+		return abs($this->alpha - $p_opacity) * 100;
+	}
+	
 	/* === GET / SET =================================================== */
 	
 	public function getOpacity()
@@ -43,6 +48,6 @@ class GeneAlpha
 	
 	public function evaluate($p_opacity_goal)
 	{
-		$this->fitting = abs($this->alpha - $p_opacity_goal) * 100;
+		$this->fitting = $this->calculateFitting($p_opacity_goal);
 	}
 }
