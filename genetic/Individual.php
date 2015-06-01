@@ -47,15 +47,15 @@ class Individual
 		$this->genome[2]->evaluate($p_individual_goal->getBlue()->getColour());
 		$this->genome[3]->evaluate($p_individual_goal->getAlpha()->getOpacity());
 		
-		$this->calculateFitting();
+		$this->fitting = $this->calculateFitting($p_individual_goal);
 	}
 	
-	private function calculateFitting()
+	public function calculateFitting($p_individual)
 	{
-		$this->fitting = $this->getRed()->getFitting()
-		+ $this->getGreen()->getFitting()
-		+ $this->getBlue()->getFitting()
-		+ $this->getAlpha()->getFitting();
+		return $this->getRed()->calculateFitting($p_individual->getRed()->getColour())
+		+ $this->getGreen()->calculateFitting($p_individual->getGreen()->getColour())
+		+ $this->getBlue()->calculateFitting($p_individual->getBlue()->getColour())
+		+ $this->getAlpha()->calculateFitting($p_individual->getAlpha()->getOpacity());
 	}
 	
 	/* === GET / SET =================================================== */

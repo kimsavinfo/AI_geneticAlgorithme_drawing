@@ -15,6 +15,11 @@ class GeneColour
 		$this->setColour(mt_rand(0,255));
 	}
 	
+	public function calculateFitting($p_colour)
+	{
+		return abs($this->colour - $p_colour);
+	}
+	
 	/* === GET / SET =================================================== */
 	
 	public function getColour()
@@ -42,6 +47,6 @@ class GeneColour
 	
 	public function evaluate($p_colour_goal)
 	{
-		$this->fitting = abs($this->colour - $p_colour_goal);
+		$this->fitting = $this->calculateFitting($p_colour_goal);
 	}
 }

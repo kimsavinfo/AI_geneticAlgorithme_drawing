@@ -11,11 +11,11 @@ class Population
 {
 	private $MIN_FITTING_POURCENTAGE = 100; // will calculate MIN_FITTING accepted
 	private $MIN_FITTING; // total fitting accepted
-	private $CROSSOVER_ACTIVATE_THRESHOLD = 40; // percentage, the odds to happen
-	private $MUTATION_ACTIVATE_THRESHOLD = 90; // percentage, the odds to happen
+	private $CROSSOVER_ACTIVATE_THRESHOLD = 90; // percentage, the odds to happen
+	private $MUTATION_ACTIVATE_THRESHOLD = 20; // percentage, the odds to happen
 	 // IF the algorithm did not succeed in reaching the MIN_FITTING
 	 // THEN it will stop to reproduce at the MAX_ITERATIONS generation
-	private $MAX_ITERATIONS = 1000;
+	private $MAX_ITERATIONS = 100;
 	
 	private $imageGoal;
 	private $individuals = array();
