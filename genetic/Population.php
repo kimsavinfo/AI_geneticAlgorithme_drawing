@@ -154,14 +154,22 @@ class Population
 		);
 	}
 	
+	/**
+	* 1 Parent is the best known choice to orient
+	* the other will bring the nuance
+	**/
 	private function reproduce2Parents($p_iIndividual)
 	{
-		$mother = $this->select1ParentForReproduction();
-		$father = $this->select1ParentForReproduction();
+		$iMother = $this->selectBestParent($p_iIndividual);
+		$iFather = mt_rand(0,($this->nb_individuals-1));
+		
+		$mother = $this->individuals[$iMother];
+		$father = $this->individuals[$iFather];
+		
 		return $this->crossover($mother, $father);
 	}
 	
-	private function crossover($p_mother, $p_father)
+	private function crossover(Individual $p_mother,Individual $p_father)
 	{
 		$red = mt_rand(0,1) ? $p_mother->getRed()->getColour() : $p_father->getRed()->getColour();
 		$blue = mt_rand(0,1) ? $p_mother->getBlue()->getColour() : $p_father->getBlue()->getColour();
@@ -171,9 +179,43 @@ class Population
 		return new Individual($red, $blue, $green, $alpha);
 	}
 	
-	private function select1ParentForReproduction()
+	/**
+	* Elitist : select the best mother for the new kid
+	* $p_iIndividual : the individual to replace
+	**/
+	private function selectBestParent($p_iIndividual)
 	{
-		return $this->individuals[mt_rand(0, ($this->nb_individuals-1))];
+		$individuals_goal = $this->imageGoal->getIndividuals();
+		$individual_goal = $individuals_goal[$p_iIndividual];
+		
+		$iBest = 0;
+		$best_fitting = 9999;
+		$iIndividualTest = 0;
+		$is_0_fitting_found = false;
+		
+		do
+		{
+			// Calculate hypothetical fitting
+			$fitting_test = $this->individuals[$iIndividualTest]
+								->calculateFitting($individual_goal);
+			
+			// Is the fitting better than the best found for the moment ?
+			if($fitting_test < $best_fitting)
+			{
+				$iBest = $iIndividualTest;
+				$best_fitting = $fitting_test;
+			}
+			
+			// Did we find the absolute fitting ?
+			if($best_fitting == 0)
+			{
+				$is_0_fitting_found = true;
+			}
+			
+			$iIndividualTest++;
+		}while($iIndividualTest < $this->nb_individuals && !$is_0_fitting_found);
+		
+		return $iBest;
 	}
 	
 	// Calculate the fitting while keeping the elite

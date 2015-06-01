@@ -40,7 +40,7 @@ class Individual
 		}
 	}
 	
-	public function evaluate($p_individual_goal)
+	public function evaluate(Individual $p_individual_goal)
 	{
 		$this->genome[0]->evaluate($p_individual_goal->getRed()->getColour());
 		$this->genome[1]->evaluate($p_individual_goal->getGreen()->getColour());
@@ -50,7 +50,7 @@ class Individual
 		$this->fitting = $this->calculateFitting($p_individual_goal);
 	}
 	
-	public function calculateFitting($p_individual)
+	public function calculateFitting(Individual $p_individual)
 	{
 		return $this->getRed()->calculateFitting($p_individual->getRed()->getColour())
 		+ $this->getGreen()->calculateFitting($p_individual->getGreen()->getColour())
