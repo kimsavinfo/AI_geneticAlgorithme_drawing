@@ -11,8 +11,8 @@ class Population
 {
 	private $MIN_FITTING_POURCENTAGE = 100; // will calculate MIN_FITTING accepted
 	private $MIN_FITTING; // total fitting accepted
-	private $CROSSOVER_ACTIVATE_THRESHOLD = 90; // percentage, the odds to happen
-	private $MUTATION_ACTIVATE_THRESHOLD = 20; // percentage, the odds to happen
+	private $CROSSOVER_ACTIVATE_THRESHOLD = 50; // percentage, the odds to happen
+	private $MUTATION_ACTIVATE_THRESHOLD = 30; // percentage, the odds to happen
 	 // IF the algorithm did not succeed in reaching the MIN_FITTING
 	 // THEN it will stop to reproduce at the MAX_ITERATIONS generation
 	private $MAX_ITERATIONS = 100;
@@ -146,11 +146,13 @@ class Population
 	
 	private function reproduce1Parent($p_iIndividual)
 	{
+		$iParent = $this->selectBestParent($p_iIndividual);
+		
 		return new Individual(
-			$this->individuals[$p_iIndividual]->getRed()->getColour(), 
-			$this->individuals[$p_iIndividual]->getGreen()->getColour(), 
-			$this->individuals[$p_iIndividual]->getBlue()->getColour(), 
-			$this->individuals[$p_iIndividual]->getalpha()->getOpacity()
+			$this->individuals[$iParent]->getRed()->getColour(), 
+			$this->individuals[$iParent]->getGreen()->getColour(), 
+			$this->individuals[$iParent]->getBlue()->getColour(), 
+			$this->individuals[$iParent]->getalpha()->getOpacity()
 		);
 	}
 	
