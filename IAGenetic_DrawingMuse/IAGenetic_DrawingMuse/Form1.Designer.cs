@@ -30,23 +30,23 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.pictureBoxGoal = new System.Windows.Forms.PictureBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.buttonEvolve = new System.Windows.Forms.Button();
-            this.buttonInitialization = new System.Windows.Forms.Button();
+            this.pictureBoxGoal = new System.Windows.Forms.PictureBox();
             this.pictureBoxGenetic = new System.Windows.Forms.PictureBox();
+            this.buttonInitialization = new System.Windows.Forms.Button();
+            this.buttonEvolve = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenetic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,16 +55,18 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonEvolve);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonInitialization);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(613, 554);
-            this.splitContainer1.SplitterDistance = 306;
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(508, 323);
+            this.splitContainer1.SplitterDistance = 54;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -74,55 +76,53 @@
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer2.Panel2
+            // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.pictureBoxGoal);
-            this.splitContainer2.Size = new System.Drawing.Size(306, 554);
-            this.splitContainer2.SplitterDistance = 120;
+            this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            this.splitContainer2.Size = new System.Drawing.Size(508, 265);
+            this.splitContainer2.SplitterDistance = 195;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // pictureBoxGoal
-            // 
-            this.pictureBoxGoal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxGoal.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxGoal.Name = "pictureBoxGoal";
-            this.pictureBoxGoal.Size = new System.Drawing.Size(306, 430);
-            this.pictureBoxGoal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBoxGoal.TabIndex = 0;
-            this.pictureBoxGoal.TabStop = false;
             // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.buttonEvolve);
-            this.splitContainer3.Panel1.Controls.Add(this.buttonInitialization);
+            this.splitContainer3.Panel1.Controls.Add(this.pictureBoxGoal);
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.pictureBoxGenetic);
-            this.splitContainer3.Size = new System.Drawing.Size(303, 554);
-            this.splitContainer3.SplitterDistance = 120;
+            this.splitContainer3.Size = new System.Drawing.Size(508, 195);
+            this.splitContainer3.SplitterDistance = 257;
             this.splitContainer3.TabIndex = 0;
             // 
-            // buttonEvolve
+            // pictureBoxGoal
             // 
-            this.buttonEvolve.Location = new System.Drawing.Point(216, 12);
-            this.buttonEvolve.Name = "buttonEvolve";
-            this.buttonEvolve.Size = new System.Drawing.Size(75, 23);
-            this.buttonEvolve.TabIndex = 1;
-            this.buttonEvolve.Text = "GO";
-            this.buttonEvolve.UseVisualStyleBackColor = true;
-            this.buttonEvolve.Click += new System.EventHandler(this.buttonEvolve_Click);
+            this.pictureBoxGoal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxGoal.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxGoal.Name = "pictureBoxGoal";
+            this.pictureBoxGoal.Size = new System.Drawing.Size(257, 195);
+            this.pictureBoxGoal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBoxGoal.TabIndex = 0;
+            this.pictureBoxGoal.TabStop = false;
+            // 
+            // pictureBoxGenetic
+            // 
+            this.pictureBoxGenetic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxGenetic.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxGenetic.Name = "pictureBoxGenetic";
+            this.pictureBoxGenetic.Size = new System.Drawing.Size(247, 195);
+            this.pictureBoxGenetic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBoxGenetic.TabIndex = 0;
+            this.pictureBoxGenetic.TabStop = false;
             // 
             // buttonInitialization
             // 
-            this.buttonInitialization.Location = new System.Drawing.Point(23, 12);
+            this.buttonInitialization.Location = new System.Drawing.Point(340, 12);
             this.buttonInitialization.Name = "buttonInitialization";
             this.buttonInitialization.Size = new System.Drawing.Size(75, 23);
             this.buttonInitialization.TabIndex = 0;
@@ -130,21 +130,21 @@
             this.buttonInitialization.UseVisualStyleBackColor = true;
             this.buttonInitialization.Click += new System.EventHandler(this.buttonInitialization_Click);
             // 
-            // pictureBoxGenetic
+            // buttonEvolve
             // 
-            this.pictureBoxGenetic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxGenetic.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxGenetic.Name = "pictureBoxGenetic";
-            this.pictureBoxGenetic.Size = new System.Drawing.Size(303, 430);
-            this.pictureBoxGenetic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBoxGenetic.TabIndex = 0;
-            this.pictureBoxGenetic.TabStop = false;
+            this.buttonEvolve.Location = new System.Drawing.Point(421, 12);
+            this.buttonEvolve.Name = "buttonEvolve";
+            this.buttonEvolve.Size = new System.Drawing.Size(75, 23);
+            this.buttonEvolve.TabIndex = 1;
+            this.buttonEvolve.Text = "Evolve";
+            this.buttonEvolve.UseVisualStyleBackColor = true;
+            this.buttonEvolve.Click += new System.EventHandler(this.buttonEvolve_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 554);
+            this.ClientSize = new System.Drawing.Size(508, 323);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -152,16 +152,16 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoal)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGenetic)).EndInit();
             this.ResumeLayout(false);
 
@@ -176,8 +176,6 @@
         private System.Windows.Forms.PictureBox pictureBoxGenetic;
         private System.Windows.Forms.Button buttonEvolve;
         private System.Windows.Forms.Button buttonInitialization;
-
-
     }
 }
 

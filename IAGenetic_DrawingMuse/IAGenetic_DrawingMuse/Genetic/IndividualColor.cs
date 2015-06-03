@@ -12,9 +12,9 @@ namespace IAGenetic_DrawingMuse.Genetic
     {
         private Dictionary<string, GeneColor> genome;
 
-        public IndividualColor(Color _pixel )
+        public IndividualColor(Color _pixel)
         {
-            genome = new Dictionary<string ,GeneColor>();
+            genome = new Dictionary<string, GeneColor>();
             genome.Add("A", new GeneColor(_pixel.A));
             genome.Add("R", new GeneColor(_pixel.R));
             genome.Add("G", new GeneColor(_pixel.G));

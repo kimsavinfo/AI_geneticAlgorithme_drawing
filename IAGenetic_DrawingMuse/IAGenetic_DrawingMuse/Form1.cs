@@ -23,10 +23,11 @@ namespace IAGenetic_DrawingMuse
         {
             InitializeComponent();
 
-            // Create a Bitmap object from an image file.
+            // imgGoal = new Bitmap(Properties.Resources.france);
+            imgGoal = new Bitmap(Properties.Resources.mario_pixelise);
+            // imgGoal = new Bitmap(Properties.Resources.landscape);
             // imgGoal = new Bitmap(Properties.Resources.joconde);
-            imgGoal = new Bitmap(Properties.Resources.france);
-
+            
             pictureBoxGoal.Image = imgGoal;
         }
 
