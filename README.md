@@ -1,4 +1,4 @@
-# AI_geneticAlgorithme_drawing
+# AI : Genetic Algorithme - the Joconde will be our muse
 Using a genetic algorithm do draw a picture.
 The Joconde was the final test.
 
