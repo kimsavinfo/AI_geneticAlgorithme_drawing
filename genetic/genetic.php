@@ -96,6 +96,9 @@ function evolve(&$p_pixels_genetic, $p_pixels_goal, &$p_stats, $p_palette)
 
 function reproduce(&$p_new_generation, $p_pixels_genetic, $p_pixels_goal, $p_nb_pixels, $p_palette)
 {
+	$nb_colours = count($p_palette) - 1;
+	$palette_keys = array_keys($p_palette);
+	
 	for($iPixel = 0; $iPixel < $p_nb_pixels; $iPixel++)
 	{
 		// Reproduction phase : create a new individual
@@ -113,7 +116,7 @@ function reproduce(&$p_new_generation, $p_pixels_genetic, $p_pixels_goal, $p_nb_
 		$random_mutation = mt_rand(0,100);
 		if($random_mutation < $GLOBALS['MUTATION_ACTIVATE_THRESHOLD'])
 		{
-			mutate($p_new_generation[$iPixel], $p_palette);
+			mutate($p_new_generation[$iPixel], $p_palette, $palette_keys, $nb_colours);
 		}
 	}
 }
@@ -193,28 +196,9 @@ function crossover($p_mother, $p_father, $p_pixel_goal)
 	return $child;
 }
 
-function mutate(&$p_pixel, $p_palette)
+function mutate(&$p_pixel, $p_palette, $p_palette_keys, $p_nb_colours)
 {
-	$nb_colours = count($p_palette) - 1;
-	$palette_keys = array_keys($p_palette);
-	$p_pixel = $p_palette[$palette_keys[mt_rand(0, $nb_colours)]];
-
-	/* OLD VERSION
-	for($iColour = 0; $iColour < 4; $iColour++)
-	{
-		if(mt_rand(0,1))
-		{
-			if($iColour == 3)
-			{
-				$pixel[$iColour] = mt_rand(0, (float)mt_rand(0,100)/100);
-			}
-			else
-			{
-				$pixel[$iColour] = mt_rand(0,255);
-			}
-		}
-	}
-	*/
+	$p_pixel = $p_palette[$p_palette_keys[mt_rand(0, $p_nb_colours)]];
 }
 
 /** ====================================================================================
