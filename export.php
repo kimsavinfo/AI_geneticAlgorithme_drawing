@@ -3,6 +3,16 @@
 require_once('config.php');
 
 $file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
+if(isset($_GET['basename']))
+{
+	/*
+	export.php?basename=france
+	export.php?basename=mario_pixelise
+	export.php?basename=joconde
+	*/
+	$file_test = $GLOBALS['DIR_UPLOADED_IMG'].$_GET['basename'].".png";
+}
+
 
 // Get all pixels from the image
 $pixels_goal = array();
