@@ -2,8 +2,8 @@
 
 require_once('config.php');
 
-// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
-$file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario_pixelise.png";
+$file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
+// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario_pixelise.png";
 
 
 // $file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario.png";

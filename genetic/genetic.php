@@ -82,7 +82,7 @@ function evolve(&$p_pixels_genetic, $p_pixels_goal, &$p_stats, $p_palette)
 
 		// Who will survive ?
 		// Calculate fitting at the same time for optimization
-		survive($p_pixels_genetic, $new_generation, $p_pixels_goal, $nb_pixels, $p_stats['fitting_total']);
+		survive($p_pixels_genetic, $new_generation, $p_pixels_goal, $nb_pixels, $p_stats);
 
 		$p_stats['nb_generations']++;
 	}
@@ -206,9 +206,10 @@ function mutate(&$p_pixel, $p_palette, $p_palette_keys, $p_nb_colours)
 	Tournament : better fitting (younger if truce) surviving
 ==================================================================================== **/
 
-function survive(&$p_pixels_genetic, $p_new_generation, $p_pixels_goal, $p_nb_pixels, &$p_fitting_total)
+function survive(&$p_pixels_genetic, $p_new_generation, $p_pixels_goal, $p_nb_pixels, &$p_stats)
 {
-	$p_fitting_total = 0;
+	$p_stats['fitting_total'] = 0;
+	$p_stats['nb_error'] = 0;
 
 	for($iPixel = 0; $iPixel < $p_nb_pixels; $iPixel++)
 	{
@@ -218,11 +219,18 @@ function survive(&$p_pixels_genetic, $p_new_generation, $p_pixels_goal, $p_nb_pi
 		if($new_fitting <= $actual_fitting )
 		{
 			$p_pixels_genetic[$iPixel] = $p_new_generation[$iPixel];
-			$p_fitting_total += $new_fitting;
+			$p_stats['fitting_total'] += $new_fitting;
 		}
 		else
 		{
-			$p_fitting_total += $actual_fitting;
+			$p_stats['fitting_total'] += $actual_fitting;
+		}
+		
+		if($new_fitting > 0 &&  $actual_fitting > 0)
+		{
+			$p_stats['nb_error']++;
 		}
 	}
+	
+	$p_stats['percentage_error'] = $p_stats['nb_error'] / $p_nb_pixels;
 }
