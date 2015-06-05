@@ -4,6 +4,7 @@ ini_set('memory_limit','10000M');
 
 $GLOBALS['DIR_UPLOADED_IMG'] = "uploaded/";
 $GLOBALS['DIR_IMG_MAP'] = "img_map/";
+$GLOBALS['DIR_RESULTS'] = "_results/";
 
 require_once('genetic/image_manager.php');
 require_once('genetic/css_manager.php');
