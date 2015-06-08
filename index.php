@@ -2,11 +2,11 @@
 
 require_once('config.php');
 
-$file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
+// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
 // $file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario_pixelise.png";
-
-
-// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario.png";
+// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."joconde_little.png";
+ $file_test = $GLOBALS['DIR_UPLOADED_IMG']."landscape_little.png";
+// $file_test = $GLOBALS['DIR_UPLOADED_IMG']."mario_little.png";
 
 
 // Get all pixels from the image
@@ -76,6 +76,7 @@ evolve($pixels_genetic, $pixels_goal, $stats, $palette)
 				</div>
 			</div>
 			<hr/>
+			<!--
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-bordered">
@@ -107,10 +108,12 @@ evolve($pixels_genetic, $pixels_goal, $stats, $palette)
 						</thead>
 						<tbody>
 <?php
+/*
 for ($iPixels = 0; $iPixels < $nb_pixels; $iPixels++)
 {
 	$pixel_goal = $pixels_goal[$iPixels];
 	$pixel_genetic = $pixels_genetic[$iPixels];
+*/
 ?>
 							<tr>
 								<td>
@@ -156,13 +159,16 @@ for ($iPixels = 0; $iPixels < $nb_pixels; $iPixels++)
 								</td>
 							</tr>
 <?php
+/*
 }
+*/
 ?>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+		-->
 		
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

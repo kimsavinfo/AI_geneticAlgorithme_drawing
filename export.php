@@ -6,9 +6,13 @@ $file_test = $GLOBALS['DIR_UPLOADED_IMG']."france.png";
 if(isset($_GET['basename']))
 {
 	/*
+	5.39.94.96/IA_images/export.php?basename=joconde
 	export.php?basename=france
 	export.php?basename=mario_pixelise
 	export.php?basename=joconde
+	export.php?basename=joconde_little
+	export.php?basename=mario_little
+	export.php?basename=landscape_little
 	*/
 	$file_test = $GLOBALS['DIR_UPLOADED_IMG'].$_GET['basename'].".png";
 }
@@ -46,6 +50,6 @@ $message .=  'MUTATION_ACTIVATE_THRESHOLD :'.var_export($GLOBALS['MUTATION_ACTIV
 $message .=  'MAX_ITERATIONS :'.var_export($GLOBALS['MAX_ITERATIONS'], true).'<br/>';
 $message .=  'STATS :'.var_export($stats, true).'<br/>';
 
-mail($to, $subject, $message, $headers);
+// mail($to, $subject, $message, $headers);
 
 ?>

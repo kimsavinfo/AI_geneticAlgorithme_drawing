@@ -36,3 +36,13 @@ Les fichiers contenant les tableaux ont trois tableaux contenant diverses inform
 $image_infos : contient les infos comme la hauteur et largeur de l'image
 $image_unique : contient les pixels qui sont uniques un à un 
 $image_individuals : contient tous les pixels de l'image dans l'ordre
+
+
+
+------ JOCONDE 35x35
+uploaded/joconde_little.png -> _results/joconde_little_pixels_1433188693.6549.png :
+MIN_FITTING_POURCENTAGE :100
+CROSSOVER_ACTIVATE_THRESHOLD :5
+MUTATION_ACTIVATE_THRESHOLD :20
+MAX_ITERATIONS :10
+STATS :array ( 'nb_generations' => 10, 'min_fitting' => 0, 'fitting_total' => 1431, 'microtime_start' => 1433188651.1945901, 'nb_error' => 328, 'percentage_error' => 0.17681940700808627, 'microtime_end' => 1433188693.6490459, )
