@@ -41,3 +41,20 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse.sln
+*.suo
+*.config
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/bin/Debug/IAGenetic_DrawingMuse.exe
+*.pdb
+*.exe
+*.resx
+*.csproj
+*.cache
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/obj/Debug/IAGenetic_DrawingMuse.csproj.FileListAbsolute.txt
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/obj/Debug/IAGenetic_DrawingMuse.Form1.resources
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/obj/Debug/IAGenetic_DrawingMuse.Properties.Resources.resources
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/Properties/Settings.settings
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/Properties/Settings.Designer.cs
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/obj/Debug/*
+IAGenetic_DrawingMuse/IAGenetic_DrawingMuse/Properties/AssemblyInfo.cs
