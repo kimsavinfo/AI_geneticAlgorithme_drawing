@@ -21,11 +21,15 @@ namespace IAGenetic_DrawingMuse.Genetic
             genome.Add("B", new GeneColor(_pixel.B));
         }
 
-        // _iColorMax : number of colors - 1
-        public void Mutate(IndividualColor[] _palette, int _iColorMax)
+        public int GetFitness(IndividualColor _goal)
         {
-            Random random = new Random();
-            genome = _palette.ElementAt(random.Next(0, _iColorMax)).GetGenome();
+            Dictionary<string, GeneColor> genomeGoal = _goal.GetGenome();
+
+            return genome["A"].GetFitness(genomeGoal["A"].GetColor()) +
+                    genome["R"].GetFitness(genomeGoal["R"].GetColor()) +
+                    genome["G"].GetFitness(genomeGoal["G"].GetColor()) +
+                    genome["B"].GetFitness(genomeGoal["B"].GetColor())
+                ;
         }
 
         public Dictionary<string, GeneColor> GetGenome()

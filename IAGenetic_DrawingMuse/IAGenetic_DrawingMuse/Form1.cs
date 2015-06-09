@@ -15,36 +15,50 @@ namespace IAGenetic_DrawingMuse
 {
     public partial class Form1 : Form
     {
-        private PopulationGenetic muse;
+        private PopulationGenetic populationGenetic;
         private Bitmap imgGoal;
+        private PopulationGoal populationGoal;
 
         public Form1()
         {
             InitializeComponent();
 
             // Create a Bitmap object from an image file.
-            imgGoal = new Bitmap(Properties.Resources.joconde);
+            // imgGoal = new Bitmap(Properties.Resources.joconde);
+            imgGoal = new Bitmap(Properties.Resources.france);
+
             pictureBoxGoal.Image = imgGoal;
         }
 
-        private void buttonInitialization_Click(object sender, EventArgs e)
+        private void Draw()
         {
-            PopulationGoal goal = new PopulationGoal(imgGoal);
-            muse = new PopulationGenetic(goal);
-
-            Bitmap imgGenetic = new Bitmap(muse.GetWitdh(), muse.GetHeight());
-            IndividualColor[] individuals = muse.GetIndividuals();
+            Bitmap imgGenetic = new Bitmap(populationGenetic.GetWitdh(), populationGenetic.GetHeight());
+            IndividualColor[] individuals = populationGenetic.GetIndividuals();
             int iPixel = 0;
             int iLine, iColumn;
             foreach (IndividualColor pixel in individuals)
             {
-                iLine = (int)Math.Floor((double)(iPixel / muse.GetWitdh()));
-                iColumn = iPixel - iLine * muse.GetWitdh();
+                iLine = (int)Math.Floor((double)(iPixel / populationGenetic.GetWitdh()));
+                iColumn = iPixel - iLine * populationGenetic.GetWitdh();
                 imgGenetic.SetPixel(iColumn, iLine, pixel.GetColor());
 
                 iPixel++;
             }
+
             pictureBoxGenetic.Image = imgGenetic;
+        }
+
+        private void buttonInitialization_Click(object sender, EventArgs e)
+        {
+            populationGoal = new PopulationGoal(imgGoal);
+            populationGenetic = new PopulationGenetic(populationGoal);
+            Draw();
+        }
+
+        private void buttonEvolve_Click(object sender, EventArgs e)
+        {
+            populationGenetic.Evolve(populationGoal);
+            Draw();
         }
     }
 }
