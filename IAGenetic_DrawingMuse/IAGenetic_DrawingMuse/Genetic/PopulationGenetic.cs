@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Drawing;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace IAGenetic_DrawingMuse.Genetic
 {
@@ -26,7 +28,7 @@ namespace IAGenetic_DrawingMuse.Genetic
         {
             random = new Random();
             fitnessTotal = 0; // The more, the farer we are from our goal
-            MAX_GENERATIONS = 100;
+            MAX_GENERATIONS = 1;
             MIN_FITNESS_PERCENTAGE = 100;
             MIN_FITNESS = 0;
             CROSSOVER_PERCENTAGE = 95;
@@ -60,7 +62,7 @@ namespace IAGenetic_DrawingMuse.Genetic
             }
         }
 
-        public void Evolve(PopulationGoal _goal)
+        public void Evolve(PopulationGoal _goal, RichTextBox _logs)
         {
             IndividualColor[] individualsGoal = _goal.GetIndividuals();
             Dictionary<string, IndividualColor> palette = _goal.GetPalette();
@@ -83,11 +85,18 @@ namespace IAGenetic_DrawingMuse.Genetic
                 Survive(newGeneration, individualsGoal);
 
                 iGeneration++;
-                Console.WriteLine("Generation {0} : {1}", iGeneration, fitnessTotal);
+                Task.Factory.StartNew(() => _logs.Invoke(new Action(() =>
+                    _logs.AppendText("\nGeneration " + iGeneration + " : " + fitnessTotal)
+                )));
+                Task.Factory.StartNew(() => _logs.Invoke(new Action(() =>
+                    _logs.ScrollToCaret()
+                )));
             }
 
             endTime = DateTime.Now;
         }
+
+        #region selection
 
         private IndividualColor SelectBest(IndividualColor _goal)
         {
@@ -121,6 +130,8 @@ namespace IAGenetic_DrawingMuse.Genetic
             return individuals[iBest];
         }
 
+       
+
         private GeneColor SelectBest(GeneColor _mother, GeneColor _father, GeneColor _goal)
         {
             int fitnessMother = _goal.GetFitness(_mother.GetColor());
@@ -141,30 +152,9 @@ namespace IAGenetic_DrawingMuse.Genetic
             );
         }
 
-        private void Survive(IndividualColor[] _new, IndividualColor[] _goal)
-        {
-            fitnessTotal = 0;
-            int fitnessActu, fitnessNew;
+        #endregion
 
-            for (int iIndividual = 0; iIndividual < nbIndividuals; iIndividual++)
-            {
-                fitnessActu = _goal[iIndividual].GetFitness(individuals[iIndividual]);
-                fitnessNew = _goal[iIndividual].GetFitness(_new[iIndividual]);
-
-                if (fitnessNew <= fitnessActu)
-                {
-                    individuals[iIndividual] = _new[iIndividual];
-                    fitnessTotal += fitnessNew;
-                }
-                else
-                {
-                    fitnessTotal += fitnessActu;
-                }
-            }
-        }
-
-
-        // =======================================================================
+        #region reproduction
 
         private void Reproduce(ref IndividualColor[] _newGeneration, IndividualColor[] _individualsGoal)
         {
@@ -202,7 +192,9 @@ namespace IAGenetic_DrawingMuse.Genetic
             return SelectBest(_goal);
         }
 
-        // =======================================================================
+        #endregion
+
+        #region mutate
 
         private void Mutate(ref IndividualColor[] _newGeneration,
                                         Dictionary<string, IndividualColor> _palette,
@@ -225,7 +217,35 @@ namespace IAGenetic_DrawingMuse.Genetic
             }
         }
 
-        // =======================================================================
+        #endregion
+
+        #region survive
+
+        private void Survive(IndividualColor[] _new, IndividualColor[] _goal)
+        {
+            fitnessTotal = 0;
+            int fitnessActu, fitnessNew;
+
+            for (int iIndividual = 0; iIndividual < nbIndividuals; iIndividual++)
+            {
+                fitnessActu = _goal[iIndividual].GetFitness(individuals[iIndividual]);
+                fitnessNew = _goal[iIndividual].GetFitness(_new[iIndividual]);
+
+                if (fitnessNew <= fitnessActu)
+                {
+                    individuals[iIndividual] = _new[iIndividual];
+                    fitnessTotal += fitnessNew;
+                }
+                else
+                {
+                    fitnessTotal += fitnessActu;
+                }
+            }
+        }
+
+        #endregion
+
+        #region fitness
 
         private void CalculateFitness(IndividualColor[] individualsGoal)
         {
@@ -242,8 +262,60 @@ namespace IAGenetic_DrawingMuse.Genetic
             return fitnessTotal;
         }
 
+        #endregion
 
-        // =======================================================================
+        #region setter
+
+        public void SetMaxGenerations(int _maxGenerations)
+        {
+            MAX_GENERATIONS = _maxGenerations >= 1 ? _maxGenerations : 1;
+        }
+
+        public void SetMinFitnessPercentage(int _minFitnessPercentage)
+        {
+            if (_minFitnessPercentage >= 0 && _minFitnessPercentage <= 100)
+            {
+                MIN_FITNESS_PERCENTAGE = _minFitnessPercentage;
+            }
+            else
+            {
+                MIN_FITNESS_PERCENTAGE = 10;
+            }
+
+            MIN_FITNESS = 0;
+            if (MIN_FITNESS_PERCENTAGE < 100)
+            {
+                MIN_FITNESS = nbIndividuals * MIN_FITNESS_PERCENTAGE / 100;
+            }
+        }
+
+        public void SetCrossoverPercentage(int _crossoverPercentage)
+        {
+            if (_crossoverPercentage >= 0 && _crossoverPercentage <= 100)
+            {
+                CROSSOVER_PERCENTAGE = _crossoverPercentage;
+            }
+            else
+            {
+                CROSSOVER_PERCENTAGE = 95;
+            }
+        }
+
+        public void SetMutationPercentage(int _mutationPercentage)
+        {
+            if (_mutationPercentage >= 0 && _mutationPercentage <= 100)
+            {
+                MUTATION_PERCENTAGE = _mutationPercentage;
+            }
+            else
+            {
+                MUTATION_PERCENTAGE = 30;
+            }
+        }
+
+        #endregion
+
+        #region getter
 
         public string GetStartTime()
         {
@@ -255,36 +327,29 @@ namespace IAGenetic_DrawingMuse.Genetic
             return endTime.ToString();
         }
 
-
-        public void SetMaxGenerations(int _maxGenerations)
-        {
-            MAX_GENERATIONS = _maxGenerations;
-        }
-
-        public void SetMinFitnessPercentage(int _minFitnessPercentage)
-        {
-            MIN_FITNESS_PERCENTAGE = _minFitnessPercentage;
-
-            MIN_FITNESS = 0;
-            if (MIN_FITNESS_PERCENTAGE < 100)
-            {
-                MIN_FITNESS = nbIndividuals * MIN_FITNESS_PERCENTAGE / 100;
-            }
-        }
-
-        public void SetCrossoverPercentage(int _crossoverPercentage)
-        {
-            CROSSOVER_PERCENTAGE = _crossoverPercentage;
-        }
-
-        public void SetMutationPercentage(int _mutationPercentage)
-        {
-            MUTATION_PERCENTAGE = _mutationPercentage;
-        }
-
         public string GetDuration()
         {
             return (endTime - startTime).ToString();
         }
+
+        public string GetLogs()
+        {
+            string infos = "\n\n================================================================\n";
+            infos += "Fitness Total: " + fitnessTotal;
+            infos += "\t\t\t\tNb Generation: " + iGeneration;
+            infos += "\t\t\tDuration: " + GetDuration();
+            infos += "\nMAX_GENERATIONS: " + MAX_GENERATIONS;
+            infos += "\t\tMIN_FITNESS_PERCENTAGE: " + MIN_FITNESS_PERCENTAGE;
+            infos += "\t\tMIN_FITNESS: " + MIN_FITNESS;
+            infos += "\nCROSSOVER_PERCENTAGE: " + CROSSOVER_PERCENTAGE;
+            infos += "\t\tMUTATION_PERCENTAGE: " + MUTATION_PERCENTAGE;
+            infos += "\n================================================================\n\n";
+
+            return infos;
+        }
+
+        #endregion
+
+
     }
 }

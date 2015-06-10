@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;
 using IAGenetic_DrawingMuse.Genetic;
+using System.Threading;
 
 namespace IAGenetic_DrawingMuse
 {
@@ -23,12 +24,37 @@ namespace IAGenetic_DrawingMuse
         {
             InitializeComponent();
 
-            // imgGoal = new Bitmap(Properties.Resources.france);
-            imgGoal = new Bitmap(Properties.Resources.mario_pixelise);
-            // imgGoal = new Bitmap(Properties.Resources.landscape);
-            // imgGoal = new Bitmap(Properties.Resources.joconde);
-            
-            pictureBoxGoal.Image = imgGoal;
+            InitializetListPictures();
+        }
+
+        private void buttonInitialization_Click(object sender, EventArgs e)
+        {
+            GetUserChoice();
+            populationGoal = new PopulationGoal(imgGoal);
+            populationGenetic = new PopulationGenetic(populationGoal);
+            Draw();
+
+            logs.Clear();
+            buttonEvolve.Enabled = true;
+        }
+
+        private void buttonEvolve_Click(object sender, EventArgs e)
+        {
+            populationGenetic.SetMaxGenerations(int.Parse(textBoxMaxGeneration.Text));
+            populationGenetic.SetMinFitnessPercentage(int.Parse(textBoxAcceptedError.Text));
+            populationGenetic.SetCrossoverPercentage(int.Parse(textBoxCrossover.Text));
+            populationGenetic.SetMutationPercentage(int.Parse(textBoxMutation.Text));
+
+            var task = Task.Factory.StartNew(() =>
+            {
+                populationGenetic.Evolve(populationGoal, logs);
+        
+                logs.Invoke(new Action(() =>
+                    logs.AppendText(populationGenetic.GetLogs())
+                ));
+            });
+
+            Draw();
         }
 
         private void Draw()
@@ -49,17 +75,60 @@ namespace IAGenetic_DrawingMuse
             pictureBoxGenetic.Image = imgGenetic;
         }
 
-        private void buttonInitialization_Click(object sender, EventArgs e)
+        private void InitializetListPictures()
         {
-            populationGoal = new PopulationGoal(imgGoal);
-            populationGenetic = new PopulationGenetic(populationGoal);
-            Draw();
+            listPictures.SelectedIndex = 0;
+            GetUserChoice();
         }
 
-        private void buttonEvolve_Click(object sender, EventArgs e)
+        private void GetUserChoice()
         {
-            populationGenetic.Evolve(populationGoal);
-            Draw();
+            switch (listPictures.SelectedIndex)
+            {
+                case 1:
+                    imgGoal = new Bitmap(Properties.Resources.mario_pixelise);
+                    break;
+                case 2:
+                    imgGoal = new Bitmap(Properties.Resources.landscape);
+                    break;
+                case 3:
+                    imgGoal = new Bitmap(Properties.Resources.joconde);
+                    break;
+                case 4:
+                    imgGoal = new Bitmap(Properties.Resources.mario);
+                    break;
+                default:
+                    imgGoal = new Bitmap(Properties.Resources.france);
+                    break;
+            }
+            pictureBoxGoal.Image = imgGoal;
         }
+
+        private void textBoxMaxGeneration_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AcceptOnlyNumbers(e);
+        }
+
+        private void textBoxAcceptedError_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AcceptOnlyNumbers(e);
+        }
+
+        private void textBoxCrossover_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AcceptOnlyNumbers(e);
+        }
+
+        private void textBoxMutation_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AcceptOnlyNumbers(e);
+        }
+
+        private void AcceptOnlyNumbers(KeyPressEventArgs e)
+        {
+            int num = 0;
+            e.Handled = !int.TryParse(e.KeyChar.ToString(), out num);
+        }
+
     }
 }
