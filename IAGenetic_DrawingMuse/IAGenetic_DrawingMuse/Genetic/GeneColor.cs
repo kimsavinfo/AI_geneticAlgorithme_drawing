@@ -29,5 +29,13 @@ namespace IAGenetic_DrawingMuse.Genetic
         {
             return color.ToString("000");
         }
+
+        /* Not a very good idea...
+        public void Mutate()
+        {
+            Random random = new Random();
+            color = random.Next(0, 255);
+        }
+        */
     }
 }

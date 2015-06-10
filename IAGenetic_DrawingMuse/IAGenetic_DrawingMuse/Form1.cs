@@ -19,6 +19,7 @@ namespace IAGenetic_DrawingMuse
         private PopulationGenetic populationGenetic;
         private Bitmap imgGoal;
         private PopulationGoal populationGoal;
+        private int iEvolvingCycles;
 
         public Form1()
         {
@@ -29,6 +30,7 @@ namespace IAGenetic_DrawingMuse
 
         private void buttonInitialization_Click(object sender, EventArgs e)
         {
+            iEvolvingCycles = 0;
             GetUserChoice();
             populationGoal = new PopulationGoal(imgGoal);
             populationGenetic = new PopulationGenetic(populationGoal);
@@ -50,11 +52,18 @@ namespace IAGenetic_DrawingMuse
                 populationGenetic.Evolve(populationGoal, logs);
         
                 logs.Invoke(new Action(() =>
-                    logs.AppendText(populationGenetic.GetLogs())
+                    logs.AppendText(populationGenetic.GetLogs(iEvolvingCycles))
+                ));
+                logs.Invoke(new Action(() =>
+                    logs.ScrollToCaret()
+                ));
+
+                this.Invoke(new Action(() =>
+                    Draw()
                 ));
             });
 
-            Draw();
+            iEvolvingCycles++;
         }
 
         private void Draw()

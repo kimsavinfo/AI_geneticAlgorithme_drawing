@@ -54,5 +54,15 @@ namespace IAGenetic_DrawingMuse.Genetic
                 genome["B"].GetColor()
             );
         }
+
+        /* Not a very good idea...
+        public void Mutate()
+        {
+            genome["A"].Mutate();
+            genome["R"].Mutate();
+            genome["G"].Mutate();
+            genome["B"].Mutate();
+        }
+        */
     }
 }

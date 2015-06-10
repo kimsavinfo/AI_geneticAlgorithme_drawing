@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.textBoxMutation = new System.Windows.Forms.TextBox();
+            this.textBoxCrossover = new System.Windows.Forms.TextBox();
+            this.textBoxAcceptedError = new System.Windows.Forms.TextBox();
+            this.textBoxMaxGeneration = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listPictures = new System.Windows.Forms.ListBox();
@@ -38,12 +44,6 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.pictureBoxGoal = new System.Windows.Forms.PictureBox();
             this.pictureBoxGenetic = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxMaxGeneration = new System.Windows.Forms.TextBox();
-            this.textBoxAcceptedError = new System.Windows.Forms.TextBox();
-            this.textBoxCrossover = new System.Windows.Forms.TextBox();
-            this.textBoxMutation = new System.Windows.Forms.TextBox();
             this.logs = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -88,6 +88,64 @@
             this.splitContainer1.Size = new System.Drawing.Size(624, 609);
             this.splitContainer1.SplitterDistance = 105;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // textBoxMutation
+            // 
+            this.textBoxMutation.Location = new System.Drawing.Point(431, 81);
+            this.textBoxMutation.Name = "textBoxMutation";
+            this.textBoxMutation.Size = new System.Drawing.Size(35, 20);
+            this.textBoxMutation.TabIndex = 10;
+            this.textBoxMutation.Text = "10";
+            this.textBoxMutation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxMutation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMutation_KeyPress);
+            // 
+            // textBoxCrossover
+            // 
+            this.textBoxCrossover.Location = new System.Drawing.Point(431, 58);
+            this.textBoxCrossover.Name = "textBoxCrossover";
+            this.textBoxCrossover.Size = new System.Drawing.Size(35, 20);
+            this.textBoxCrossover.TabIndex = 9;
+            this.textBoxCrossover.Text = "95";
+            this.textBoxCrossover.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxCrossover.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCrossover_KeyPress);
+            // 
+            // textBoxAcceptedError
+            // 
+            this.textBoxAcceptedError.Location = new System.Drawing.Point(431, 35);
+            this.textBoxAcceptedError.Name = "textBoxAcceptedError";
+            this.textBoxAcceptedError.Size = new System.Drawing.Size(35, 20);
+            this.textBoxAcceptedError.TabIndex = 8;
+            this.textBoxAcceptedError.Text = "0";
+            this.textBoxAcceptedError.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxAcceptedError.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAcceptedError_KeyPress);
+            // 
+            // textBoxMaxGeneration
+            // 
+            this.textBoxMaxGeneration.Location = new System.Drawing.Point(431, 12);
+            this.textBoxMaxGeneration.Name = "textBoxMaxGeneration";
+            this.textBoxMaxGeneration.Size = new System.Drawing.Size(35, 20);
+            this.textBoxMaxGeneration.TabIndex = 7;
+            this.textBoxMaxGeneration.Text = "100";
+            this.textBoxMaxGeneration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxMaxGeneration.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMaxGeneration_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(360, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Mutation (%)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(354, 61);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Crossover (%)";
             // 
             // label2
             // 
@@ -196,64 +254,6 @@
             this.pictureBoxGenetic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxGenetic.TabIndex = 0;
             this.pictureBoxGenetic.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(354, 61);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Crossover (%)";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(360, 84);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Mutation (%)";
-            // 
-            // textBoxMaxGeneration
-            // 
-            this.textBoxMaxGeneration.Location = new System.Drawing.Point(431, 12);
-            this.textBoxMaxGeneration.Name = "textBoxMaxGeneration";
-            this.textBoxMaxGeneration.Size = new System.Drawing.Size(35, 20);
-            this.textBoxMaxGeneration.TabIndex = 7;
-            this.textBoxMaxGeneration.Text = "10";
-            this.textBoxMaxGeneration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxMaxGeneration.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMaxGeneration_KeyPress);
-            // 
-            // textBoxAcceptedError
-            // 
-            this.textBoxAcceptedError.Location = new System.Drawing.Point(431, 35);
-            this.textBoxAcceptedError.Name = "textBoxAcceptedError";
-            this.textBoxAcceptedError.Size = new System.Drawing.Size(35, 20);
-            this.textBoxAcceptedError.TabIndex = 8;
-            this.textBoxAcceptedError.Text = "0";
-            this.textBoxAcceptedError.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxAcceptedError.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAcceptedError_KeyPress);
-            // 
-            // textBoxCrossover
-            // 
-            this.textBoxCrossover.Location = new System.Drawing.Point(431, 58);
-            this.textBoxCrossover.Name = "textBoxCrossover";
-            this.textBoxCrossover.Size = new System.Drawing.Size(35, 20);
-            this.textBoxCrossover.TabIndex = 9;
-            this.textBoxCrossover.Text = "95";
-            this.textBoxCrossover.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxCrossover.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCrossover_KeyPress);
-            // 
-            // textBoxMutation
-            // 
-            this.textBoxMutation.Location = new System.Drawing.Point(431, 81);
-            this.textBoxMutation.Name = "textBoxMutation";
-            this.textBoxMutation.Size = new System.Drawing.Size(35, 20);
-            this.textBoxMutation.TabIndex = 10;
-            this.textBoxMutation.Text = "30";
-            this.textBoxMutation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxMutation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMutation_KeyPress);
             // 
             // logs
             // 

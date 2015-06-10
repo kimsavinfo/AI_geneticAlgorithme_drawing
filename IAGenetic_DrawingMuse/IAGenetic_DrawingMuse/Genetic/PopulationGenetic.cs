@@ -32,7 +32,7 @@ namespace IAGenetic_DrawingMuse.Genetic
             MIN_FITNESS_PERCENTAGE = 100;
             MIN_FITNESS = 0;
             CROSSOVER_PERCENTAGE = 95;
-            MUTATION_PERCENTAGE = 30;
+            MUTATION_PERCENTAGE = 10;
 
             width = _goal.GetWitdh();
             height = _goal.GetHeight();
@@ -211,8 +211,8 @@ namespace IAGenetic_DrawingMuse.Genetic
 
                 if (randomMutate < MUTATION_PERCENTAGE)
                 {
-                    randomColor = random.Next(0, nbIndividualsMax);
-                    _newGeneration[iIndividual] = _palette[_paletteKeys.ElementAt(randomColor)];
+                     randomColor = random.Next(0, nbIndividualsMax);
+                     _newGeneration[iIndividual] = _palette[_paletteKeys.ElementAt(randomColor)];
                 }
             }
         }
@@ -309,13 +309,18 @@ namespace IAGenetic_DrawingMuse.Genetic
             }
             else
             {
-                MUTATION_PERCENTAGE = 30;
+                MUTATION_PERCENTAGE = 10;
             }
         }
 
         #endregion
 
         #region getter
+
+        public int GetNbGenerations()
+        {
+            return iGeneration;
+        }
 
         public string GetStartTime()
         {
@@ -332,11 +337,11 @@ namespace IAGenetic_DrawingMuse.Genetic
             return (endTime - startTime).ToString();
         }
 
-        public string GetLogs()
+        public string GetLogs(int _iEvolvingCycles)
         {
             string infos = "\n\n================================================================\n";
             infos += "Fitness Total: " + fitnessTotal;
-            infos += "\t\t\t\tNb Generation: " + iGeneration;
+            infos += "\t\t\t\tNb Generation: " + (_iEvolvingCycles * MAX_GENERATIONS + iGeneration);
             infos += "\t\t\tDuration: " + GetDuration();
             infos += "\nMAX_GENERATIONS: " + MAX_GENERATIONS;
             infos += "\t\tMIN_FITNESS_PERCENTAGE: " + MIN_FITNESS_PERCENTAGE;
