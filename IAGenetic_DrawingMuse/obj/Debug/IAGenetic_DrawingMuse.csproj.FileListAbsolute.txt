@@ -1,0 +1,16 @@
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.Form1.resources
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.Properties.Resources.resources
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.csproj.GenerateResource.Cache
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\bin\Debug\IAGenetic_DrawingMuse.exe.config
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\bin\Debug\IAGenetic_DrawingMuse.exe
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\bin\Debug\IAGenetic_DrawingMuse.pdb
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.exe
+X:\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.pdb
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.Form1.resources
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.Properties.Resources.resources
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.csproj.GenerateResource.Cache
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\bin\Debug\IAGenetic_DrawingMuse.exe.config
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\bin\Debug\IAGenetic_DrawingMuse.exe
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\bin\Debug\IAGenetic_DrawingMuse.pdb
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.exe
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.pdb
