@@ -85,6 +85,7 @@ namespace IAGenetic_DrawingMuse.Genetic
 
             endTime = DateTime.Now;
 
+
             Task.Factory.StartNew(() => _logs.Invoke(new Action(() => _logs.AppendText(GetLogs()))));
             Task.Factory.StartNew(() => _logs.Invoke(new Action(() => _logs.ScrollToCaret())));
 

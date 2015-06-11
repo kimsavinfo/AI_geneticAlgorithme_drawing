@@ -14,3 +14,4 @@ C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMu
 C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\bin\Debug\IAGenetic_DrawingMuse.pdb
 C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.exe
 C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.pdb
+C:\Users\kimsavinfo\Dropbox\epsi\I4\ia\IAGenetic_DrawingMuse\IAGenetic_DrawingMuse\obj\Debug\IAGenetic_DrawingMuse.csprojResolveAssemblyReference.cache
