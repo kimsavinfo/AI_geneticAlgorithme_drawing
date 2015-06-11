@@ -16,16 +16,15 @@ namespace IAGenetic_DrawingMuse.Genetic
         private int widthTotal;
         private int heightTotal;
         private int nbIndividualsTotal;
-        private int nbNations;
-        private int RATIO = 10;
+        private int RATIO = 10; // How many lines to delimit a zone ?
         private List<PopulationGoal> mapGoal;
         private List<PopulationGenetic> mapGenetic;
 
         private int iGeneration;
-        private int MAX_GENERATIONS;
-        private int MIN_FITNESS_PERCENTAGE;
-        private int CROSSOVER_PERCENTAGE;
-        private int MUTATION_PERCENTAGE;
+        private int MAX_GENERATIONS; // How many generations max do we want to do ?
+        private int MIN_FITNESS_PERCENTAGE; // How many errors do we accept ?
+        private int CROSSOVER_PERCENTAGE; // What are the odds a crossover would happen ?
+        private int MUTATION_PERCENTAGE; // What are the odds a mutation would happen ?
         private DateTime startTime;
         private DateTime endTime;
 
@@ -36,34 +35,40 @@ namespace IAGenetic_DrawingMuse.Genetic
 
         private void InitGeneticNation(Bitmap _imgGoal)
         {
+            // Init properties
             mapGoal = new List<PopulationGoal>();
             mapGenetic = new List<PopulationGenetic>();
             iGeneration = 0;
 
+            // Get picture informations
             widthTotal = _imgGoal.Width;
             heightTotal = _imgGoal.Height;
             nbIndividualsTotal = _imgGoal.Width * _imgGoal.Height;
-            nbNations = 0;
-            int iLineStart = 0;
-            int iHeight = 0;
 
-            if(heightTotal > 100 && widthTotal > 100)
+            // Check if the ratio is correct
+            if (heightTotal > 100 && widthTotal > 100)
             {
                 RATIO = 5;
             }
 
+            // Generate populations
+            int iLineStart = 0;
+            int iHeight = 0;
+
             do
             {
+                // We don't want to go out of the picture
                 iHeight = (iLineStart + RATIO) > heightTotal ? (heightTotal - iLineStart) : RATIO;
+                // Get the picture zone
                 Rectangle zone = new Rectangle(0, iLineStart, widthTotal, iHeight);
                 Bitmap bitmap = _imgGoal.Clone(zone, _imgGoal.PixelFormat);
 
+                // Init populations
                 PopulationGoal populationGoal = new PopulationGoal(bitmap);
                 mapGoal.Add(populationGoal);
                 PopulationGenetic populationGenetic = new PopulationGenetic(populationGoal);
                 mapGenetic.Add(populationGenetic);
-                
-                nbNations++;
+
                 iLineStart += RATIO;
             } while (iLineStart < heightTotal);
         }
@@ -72,6 +77,7 @@ namespace IAGenetic_DrawingMuse.Genetic
         {
             startTime = DateTime.Now;
 
+            // Launch all evolving populations
             foreach(PopulationGenetic nation in mapGenetic)
             {
                 nation.SetMaxGenerations(MAX_GENERATIONS);
@@ -85,13 +91,14 @@ namespace IAGenetic_DrawingMuse.Genetic
 
             endTime = DateTime.Now;
 
-
+            // Show the statistiques
             Task.Factory.StartNew(() => _logs.Invoke(new Action(() => _logs.AppendText(GetLogs()))));
             Task.Factory.StartNew(() => _logs.Invoke(new Action(() => _logs.ScrollToCaret())));
 
             iGeneration++;
         }
 
+        // Create a Bitmap with all Indviduals from all populations
         public Bitmap GetBitmap()
         {
             Bitmap bitmap = new Bitmap(widthTotal, heightTotal);
@@ -162,9 +169,9 @@ namespace IAGenetic_DrawingMuse.Genetic
 
         #region getter
 
-        public int GetNbNations()
+        public int GetNbPopulations()
         {
-            return nbNations;
+            return mapGenetic.Count();
         }
 
         public int GetNbGenerations()

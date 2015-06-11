@@ -15,7 +15,7 @@ namespace IAGenetic_DrawingMuse
 {
     public partial class Form1 : Form
     {
-        private GeneticNation geneticNation;
+        private GeneticNation geneticNation; // Our Drawing muse ;)
         private Bitmap imgGoal;
 
         public Form1()
@@ -27,11 +27,14 @@ namespace IAGenetic_DrawingMuse
 
         private void buttonInitialization_Click(object sender, EventArgs e)
         {
+            // Get user choice and show the picked picture
             GetUserChoice();
+            
+            // Initialize the genetic algorithm
             geneticNation = new GeneticNation(imgGoal);
             Draw();
+            textBoxNbNations.Text = (geneticNation.GetNbPopulations() +1) + " nation(s)";
 
-            textBoxNbNations.Text = (geneticNation.GetNbNations() +1) + " nation(s)";
             logs.Clear();
             buttonEvolve.Enabled = true;
         }
@@ -39,15 +42,20 @@ namespace IAGenetic_DrawingMuse
         private void buttonEvolve_Click(object sender, EventArgs e)
         {
             logs.Clear();
+
+            // Set user choices for the statics properties
             geneticNation.SetMaxGenerations(int.Parse(textBoxMaxGeneration.Text));
             geneticNation.SetMinFitnessPercentage(int.Parse(textBoxAcceptedError.Text));
             geneticNation.SetCrossoverPercentage(int.Parse(textBoxCrossover.Text));
             geneticNation.SetMutationPercentage(int.Parse(textBoxMutation.Text));
 
+            // Be the inspirations with us
             Task.Factory.StartNew(() =>
             {
+                // Launch circles of life
                 geneticNation.Evolve(logs);
-
+                
+                // draw the result
                 pictureBoxGenetic.Invoke(new Action(() =>
                     Draw()
                 ));

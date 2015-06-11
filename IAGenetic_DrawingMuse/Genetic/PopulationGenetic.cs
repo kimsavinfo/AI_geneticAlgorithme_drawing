@@ -27,7 +27,7 @@ namespace IAGenetic_DrawingMuse.Genetic
         public PopulationGenetic(PopulationGoal _goal)
         {
             random = new Random();
-            fitnessTotal = 0; // The more, the farer we are from our goal
+            fitnessTotal = 0; // 0 is the nearest from our goal
             MAX_GENERATIONS = 1;
             MIN_FITNESS_PERCENTAGE = 100;
             MIN_FITNESS = 0;
@@ -47,14 +47,14 @@ namespace IAGenetic_DrawingMuse.Genetic
             List<string> paletteKeys = Enumerable.ToList(_palette.Keys);
             int paletteSize = _palette.Count();
 
-            // Don't be racist ;) and all the colours
+            // Don't be racist ;) and enjoy all the colours
             foreach (string paletteKey in paletteKeys)
             {
                 individuals[iIndividual] = _palette[paletteKey];
                 iIndividual++;
             }
 
-            // Complete with other random color from the palette
+            // Complete with other random colors from the palette
             while (iIndividual < nbIndividuals)
             {
                 individuals[iIndividual] = _palette[paletteKeys[random.Next(0, paletteSize)]];
@@ -92,7 +92,7 @@ namespace IAGenetic_DrawingMuse.Genetic
                 Task.Factory.StartNew(() => _logs.Invoke(new Action(() => _logs.ScrollToCaret())));
             }
 
-            // Recapitule
+            // Print statistiques
             Task.Factory.StartNew(() => _logs.Invoke(
                 new Action(() => _logs.AppendText(GetLogs(_iNation)))
             ));
@@ -135,8 +135,6 @@ namespace IAGenetic_DrawingMuse.Genetic
             return individuals[iBest];
         }
 
-       
-
         private GeneColor SelectBest(GeneColor _mother, GeneColor _father, GeneColor _goal)
         {
             int fitnessMother = _goal.GetFitness(_mother.GetColor());
@@ -161,6 +159,7 @@ namespace IAGenetic_DrawingMuse.Genetic
 
         #region reproduction
 
+        // Elitist algortihm
         private void Reproduce(ref IndividualColor[] _newGeneration, IndividualColor[] _individualsGoal)
         {
             for (int iIndividual = 0; iIndividual < nbIndividuals; iIndividual++)
@@ -201,6 +200,7 @@ namespace IAGenetic_DrawingMuse.Genetic
 
         #region mutate
 
+        // Get a random color from the palette
         private void Mutate(ref IndividualColor[] _newGeneration,
                                         Dictionary<string, IndividualColor> _palette,
                                         List<string> _paletteKeys
@@ -226,6 +226,7 @@ namespace IAGenetic_DrawingMuse.Genetic
 
         #region survive
 
+        // Tournament : only the best deserve to live
         private void Survive(IndividualColor[] _new, IndividualColor[] _goal)
         {
             fitnessTotal = 0;
@@ -325,16 +326,6 @@ namespace IAGenetic_DrawingMuse.Genetic
         public int GetNbGenerations()
         {
             return iGeneration;
-        }
-
-        public string GetStartTime()
-        {
-            return startTime.ToString();
-        }
-
-        public string GetEndTime()
-        {
-            return endTime.ToString();
         }
 
         public TimeSpan GetDuration()
